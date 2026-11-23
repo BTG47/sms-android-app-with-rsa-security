@@ -34,6 +34,16 @@ _Avoid_: contacto, certificado, identidad
 Confirmación de la huella de una clave pública por un canal distinto de aquel por el que se importó.
 _Avoid_: importación, confianza automática
 
+## Estados del ensamblado
+
+**Incompleto**:
+Un grupo de fragmentos que todavía no reúne las partes necesarias para formar un envelope íntegro.
+_Avoid_: recibido, descifrado, error
+
+**Expirado**:
+Un ensamblado incompleto que se descarta por inactividad, sin que ello implique corrupción ni rechazo del remitente.
+_Avoid_: fallo, corrupto, rechazado
+
 ## Estados del transporte
 
 **Aceptado para envío**:

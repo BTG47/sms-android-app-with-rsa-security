@@ -22,11 +22,14 @@ data class Fragmento(
 
 /**
  * Construye la representación textual que viaja en un SMS.
- * El id usa doce caracteres y el índice y el total, dos, según el contrato v0.2.
+ * El id usa doce caracteres hexadecimales y el índice y el total, dos, según el contrato v0.2.
  */
 fun encabezado(fragmento: Fragmento): String {
     // Verificaciones de datos del fragmento.
     require(fragmento.messageId.length == 12) { "El id debe tener 12 caracteres" }
+    require(fragmento.messageId.all { it in '0'..'9' || it in 'a'..'f' || it in 'A'..'F' }) {
+        "El id debe ser hexadecimal"
+    }
     require(fragmento.index in 1..99) { "El índice del fragmento debe estar entre 1 y 99" }
     require(fragmento.count in 1..99) { "El total de fragmentos debe estar entre 1 y 99" }
     val index = fragmento.index.toString().padStart(2, '0')

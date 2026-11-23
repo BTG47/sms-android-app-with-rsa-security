@@ -7,6 +7,7 @@ package com.securesms.app.messaging
 
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Test
 
@@ -50,5 +51,11 @@ class SmsFragmentCodecTest {
     @Test(expected = IllegalArgumentException::class)
     fun `envelope vacio se rechaza`() {
         encode(ByteArray(0))
+    }
+
+    @Test
+    fun `id hexadecimal se valida sin distinguir mayusculas`() {
+        assertNotNull(parsear("SS1:abcdef123456:01:01:QUJD"))
+        assertNull(parsear("SS1:ZZZZZZZZZZZZ:01:01:QUJD"))
     }
 }
