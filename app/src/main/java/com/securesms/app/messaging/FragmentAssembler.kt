@@ -19,9 +19,10 @@ class FragmentAssembler(
     private val maxFragmentos: Int = 99,
     private val maxGrupos: Int = 16
 ) {
-    /** Estado interno de un grupo: textos recibidos y momento del último fragmento. */
+    /** Estado interno de un grupo: textos recibidos, último fragmento y marca de expiración. */
     private data class Ensamblado(
         var ultimoFragmentoEn: Long,
+        var expirado: Boolean = false,
         val textos: MutableList<String> = mutableListOf()
     )
 
@@ -32,57 +33,61 @@ class FragmentAssembler(
      * Un texto que no se puede parsear no completa ningún grupo.
      */
     fun agregar(remitente: String, texto: String): EstadoEnsamblado {
-        // Tarea 1: parsear, obtener la clave, guardar el texto y devolver el estado.
         val fragmento = parsear(texto) ?: return EstadoEnsamblado.INCOMPLETO
         val clave = ClaveEnsamblado(remitente, fragmento.messageId)
-        val grupo = grupos.getOrPut(clave) { Ensamblado(reloj()) }
 
-        if (texto !in grupo.textos) {
-            grupo.textos.add(texto)
-            grupo.ultimoFragmentoEn = reloj()
+        val grupo = grupos[clave]
+        val activo = if (grupo == null || grupo.expirado) {
+            Ensamblado(ultimoFragmentoEn = reloj()).also { grupos[clave] = it }
+        } else {
+            grupo
+        }
+
+        if (texto !in activo.textos) {
+            activo.textos.add(texto)
+            activo.ultimoFragmentoEn = reloj()
         }
 
         return estado(remitente, fragmento.messageId) ?: EstadoEnsamblado.INCOMPLETO
     }
 
-    /** Devuelve el estado del grupo, o null si no existe o expiró. */
+    /** Devuelve el estado del grupo, EXPIRADO si se marcó por inactividad, o null si no existe. */
     fun estado(remitente: String, messageId: String): EstadoEnsamblado? {
-        // Tarea 1: deduce el estado a partir de los textos guardados.
-        // Buscar la información del Ensamblado
-        val clave = ClaveEnsamblado(remitente, messageId)
-        val infoEnsamblada = grupos[clave] ?: return null
-
-        if (decode(infoEnsamblada.textos) != null) return EstadoEnsamblado.COMPLETO else return EstadoEnsamblado.INCOMPLETO
-
-    }
-
-    /** Devuelve los bytes del Envelope solo si el grupo está completo. */
-    fun envelope(remitente: String, messageId: String): ByteArray? {
-        // Tarea 1: usa decode sobre los textos del grupo.
-        val clave = ClaveEnsamblado(remitente, messageId)
-        val infoEnsamblada = grupos[clave] ?: return null
-
-        val decodedValue = decode(infoEnsamblada.textos)
-        if (decodedValue != null) return decodedValue
-        return null
-    }
-
-    /** Elimina un grupo; permite descartar un ensamblado ya consumido. */
-    fun descartar(remitente: String, messageId: String) {
-        // Tarea 1: quita la clave del mapa.
-        val clave = ClaveEnsamblado(remitente, messageId)
-        val infoEnsamblada = grupos[clave]
-        if (infoEnsamblada != null){
-            grupos.remove(clave)
+        barrerInactivos(reloj())
+        val grupo = grupos[ClaveEnsamblado(remitente, messageId)] ?: return null
+        if (grupo.expirado) return EstadoEnsamblado.EXPIRADO
+        return if (decode(grupo.textos) != null) {
+            EstadoEnsamblado.COMPLETO
+        } else {
+            EstadoEnsamblado.INCOMPLETO
         }
     }
 
+    /** Devuelve los bytes del Envelope solo si el grupo está completo y no expiró. */
+    fun envelope(remitente: String, messageId: String): ByteArray? {
+        barrerInactivos(reloj())
+        val grupo = grupos[ClaveEnsamblado(remitente, messageId)] ?: return null
+        if (grupo.expirado) return null
+        return decode(grupo.textos)
+    }
+
+    /** Elimina un grupo; permite descartar un ensamblado ya consumido o expirado. */
+    fun descartar(remitente: String, messageId: String) {
+        barrerInactivos(reloj())
+        grupos.remove(ClaveEnsamblado(remitente, messageId))
+    }
+
     /**
-     * Barrido de grupos incompletos inactivos.
-     * Se invocará al inicio de cada método público en la Tarea 2.
+     * Marca como expirados los grupos incompletos sin actividad durante [plazoMs].
+     * Los grupos completos nunca se marcan y los expirados se conservan para que
+     * `estado` pueda exponerlos hasta que llegue un fragmento nuevo o se descarten.
      */
     private fun barrerInactivos(ahora: Long) {
-        // Tarea 2: eliminar los grupos INCOMPLETO con ahora - ultimoFragmentoEn >= plazoMs.
-        TODO("Implementar el barrido por inactividad")
+        grupos.values.forEach { grupo ->
+            val inactivo = ahora - grupo.ultimoFragmentoEn >= plazoMs
+            if (!grupo.expirado && inactivo && decode(grupo.textos) == null) {
+                grupo.expirado = true
+            }
+        }
     }
 }
