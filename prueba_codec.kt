@@ -30,8 +30,21 @@ fun encabezado(fragmento: Fragmento): String {
     return "SS1:${fragmento.messageId}:${index}:${count}:${fragmento.payload}"
 }
 
-/** Casos de aceptación ejecutables del formato de encabezado. */
+/**
+ * Convierte un texto SS1 en un [Fragmento], o devuelve null si no es canónico.
+ * La validación se delega a [encabezado] para no duplicar las reglas del contrato.
+ */
+fun parsear(texto: String): Fragmento? = runCatching {
+    val partes = texto.split(':', limit = 5)
+    require(partes.size == 5 && partes[0] == "SS1")
+    val fragmento = Fragmento(partes[1], partes[2].toInt(), partes[3].toInt(), partes[4])
+    require(encabezado(fragmento) == texto)
+    fragmento
+}.getOrNull()
+
+/** Casos de aceptación ejecutables del formato de encabezado y del parser. */
 fun main() {
+    println("Ejecutando casos de encabezado")
     check(encabezado(Fragmento("A1B2C3D4E5F6", 1, 3, "QUJD")) ==
         "SS1:A1B2C3D4E5F6:01:03:QUJD")
     check(encabezado(Fragmento("A1B2C3D4E5F6", 12, 99, "WA==")) ==
@@ -41,4 +54,11 @@ fun main() {
     check(runCatching { encabezado(Fragmento("A1B2C3D4E5F6", 100, 3, "QUJD")) }
         .exceptionOrNull() is IllegalArgumentException)
     println("Los cuatro casos de aceptación pasaron.")
+    println("Ejecutando casos de parser")
+    val texto = "SS1:A1B2C3D4E5F6:01:03:QUJD"
+    check(parsear(texto) == Fragmento("A1B2C3D4E5F6", 1, 3, "QUJD"))
+    check(parsear("SMS:A1B2C3D4E5F6:01:03:QUJD") == null)
+    check(parsear("SS1:A1B2C3D4E5F6:1:03:QUJD") == null)
+    check(parsear("SS1:ABC:01:03:QUJD") == null)
+    println("Los cuatro casos del parser pasaron.")
 }
