@@ -30,20 +30,32 @@ class FragmentAssembler(
 
     /**
      * Incorpora un texto SS1 al grupo correspondiente y devuelve su estado resultante.
-     * Un texto que no se puede parsear no completa ningún grupo.
+     * Un texto que no se puede parsear ni tiene un índice dentro de `1..count` se ignora.
+     * Los textos distintos por grupo se limitan a [maxFragmentos] y, al superar [maxGrupos],
+     * se libera el grupo con menor actividad para mantener acotada la memoria.
      */
     fun agregar(remitente: String, texto: String): EstadoEnsamblado {
+        barrerInactivos(reloj())
         val fragmento = parsear(texto) ?: return EstadoEnsamblado.INCOMPLETO
+        if (fragmento.index !in 1..fragmento.count) {
+            return estado(remitente, fragmento.messageId) ?: EstadoEnsamblado.INCOMPLETO
+        }
         val clave = ClaveEnsamblado(remitente, fragmento.messageId)
 
         val grupo = grupos[clave]
         val activo = if (grupo == null || grupo.expirado) {
+            if (grupo == null && grupos.size >= maxGrupos) {
+                val masAntiguo = grupos.minByOrNull { (_, valor) -> valor.ultimoFragmentoEn }?.key
+                if (masAntiguo != null) {
+                    grupos.remove(masAntiguo)
+                }
+            }
             Ensamblado(ultimoFragmentoEn = reloj()).also { grupos[clave] = it }
         } else {
             grupo
         }
 
-        if (texto !in activo.textos) {
+        if (texto !in activo.textos && activo.textos.size < maxFragmentos) {
             activo.textos.add(texto)
             activo.ultimoFragmentoEn = reloj()
         }
