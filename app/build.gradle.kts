@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.securesms.app"
-        minSdk = 29
+        minSdk = 31
         targetSdk = 37
         versionCode = 1
         versionName = "0.1.0"
@@ -51,4 +51,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
 
     testImplementation("junit:junit:4.13.2")
+
+    // Pruebas instrumentadas del spike de Keystore (ticket 03).
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
 }
