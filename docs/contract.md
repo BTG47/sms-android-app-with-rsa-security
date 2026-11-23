@@ -1,6 +1,6 @@
 # SecureSMS — Contrato de integración v0.2
 
-Copia controlada y versión definitiva de `SecureSMS_Contrato_Integracion_v02_Detallado-1.pdf` (18 de noviembre de 2026). Aprobada por Bruno (Android) y Persona 2 (criptografía) el 21 de noviembre de 2026. Ante cualquier divergencia, prevalece el PDF original.
+Copia controlada y versión definitiva de `docs/pdf/SecureSMS_Contrato_Integracion_v02_Detallado-1.pdf` (18 de noviembre de 2026). Aprobada por Bruno (Android) y Persona 2 (criptografía) el 21 de noviembre de 2026. Ante cualquier divergencia, prevalece el PDF original.
 
 ## 1. Alcance y fundamentos
 

@@ -55,7 +55,7 @@ Todos los archivos nuevos o modificados deben tener comentarios profesionales **
 
 ## 4. Contrato de integración con criptografía — lo que la app debe consumir
 
-**Referencia normativa del equipo:** `SecureSMS_Contrato_Integracion_v02_Detallado.pdf` y su futura copia controlada en `docs/contract.md`. Este resumen no sustituye las definiciones exactas del PDF; ante divergencias, resolverlas con Persona 2 y actualizar la versión del contrato.
+**Referencia normativa del equipo:** `docs/pdf/SecureSMS_Contrato_Integracion_v02_Detallado-1.pdf` y su copia controlada en `docs/contract.md`. Este resumen no sustituye las definiciones exactas del PDF; ante divergencias, resolverlas con Persona 2 y actualizar la versión del contrato.
 
 Los perfiles acordados son:
 
@@ -282,13 +282,13 @@ Al terminar cada bloque comunica: archivos cambiados, decisión de diseño, coma
 
 ## 12. Referencias y fuentes de trabajo
 
-- **Consigna principal:** `Final Project LIS4062 Autumn 26.pdf` — objetivo, RSA/ECC, evaluación y entrega.
-- **Documento de organización:** `SecureSMS_Organizacion_Equipo_v3_Detallada.pdf` — responsabilidades y evidencias de los tres integrantes.
-- **Contrato del equipo:** `SecureSMS_Contrato_Integracion_v02_Detallado.pdf` — APIs, formatos, perfiles, pruebas de aceptación y cambios controlados.
+- **Consigna principal:** `docs/pdf/Final Project LIS4062 Autumn 26.pdf` — objetivo, RSA/ECC, evaluación y entrega.
+- **Documento de organización:** `docs/pdf/SecureSMS_Organizacion_Equipo_v3_Detallada-1.pdf` — responsabilidades y evidencias de los tres integrantes.
+- **Contrato del equipo:** `docs/pdf/SecureSMS_Contrato_Integracion_v02_Detallado-1.pdf` — APIs, formatos, perfiles, pruebas de aceptación y cambios controlados.
 - **Artículo [1]:** Bodur y Kara (2015), *Secure SMS Encryption Using RSA Encryption Algorithm on Android Message Application* — arquitectura de envío y restricciones de longitud/base64.
 - **Artículo [2]:** Agoyi y Seral (2010), *SMS Security: An Asymmetric Encryption Approach* — tiempos y expansión del ciphertext.
 - **Artículo [3]:** Jintcharadze y Abashidze (2023), *Performance and Comparative Analysis of Elliptic Curve Cryptography and RSA* — comparación RSA/ECC y esquemas híbridos.
-- **Documento [4]:** `SSL TLS Using Wireshark Autumn 2026.pdf` — asignado a Persona 3, no a la implementación Android.
+- **Documento [4]:** `SSL TLS Using Wireshark Autumn 2026.pdf` — asignado a Persona 3, no a la implementación Android; no está incluido en este repositorio.
 
 ---
 
