@@ -20,6 +20,9 @@ class RepositorioContactos {
     /** Devuelve el contacto registrado con ese número, o `null` si no existe. */
     fun buscar(numero: String): Contacto? = contactos[numero]
 
+    /** Devuelve los contactos registrados en el orden en que se agregaron. */
+    fun todos(): List<Contacto> = contactos.values.toList()
+
     /** Devuelve la clave pública guardada para ese número, o `null` si no hay. */
     fun claveDe(numero: String): ClavePublicaImportada? = claves[numero]
 
