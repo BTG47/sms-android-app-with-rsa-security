@@ -11,10 +11,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -49,18 +52,24 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 var pantalla by remember { mutableStateOf(Pantalla.CONTACTOS) }
 
-                Column {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 8.dp, vertical = 4.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    ) {
-                        TextButton(onClick = { pantalla = Pantalla.CONTACTOS }) {
-                            Text("Contactos")
-                        }
-                        TextButton(onClick = { pantalla = Pantalla.RESUMEN }) {
-                            Text("Resumen demo")
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .safeDrawingPadding(),
+                ) {
+                    Surface(tonalElevation = 2.dp) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            TextButton(onClick = { pantalla = Pantalla.CONTACTOS }) {
+                                Text("Contactos")
+                            }
+                            TextButton(onClick = { pantalla = Pantalla.RESUMEN }) {
+                                Text("Resumen demo")
+                            }
                         }
                     }
 

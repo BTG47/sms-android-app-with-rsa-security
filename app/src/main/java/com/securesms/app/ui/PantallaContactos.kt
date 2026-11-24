@@ -1,5 +1,6 @@
 package com.securesms.app.ui
 
+import android.content.ClipData
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -16,17 +18,23 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ClipEntry
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.securesms.app.identity.EstadoClave
 import com.securesms.app.integration.Perfil
+import kotlinx.coroutines.launch
 
 /** Etiqueta visible de cada estado; el vocabulario sigue el glosario del proyecto. */
 fun etiquetaDe(estado: EstadoClave): String = when (estado) {
@@ -163,6 +171,14 @@ private fun DetalleDeClave(
     puedeEnviar: Boolean,
 ) {
     Card(Modifier.fillMaxWidth()) {
+        val portapapeles = LocalClipboard.current
+        val alcance = rememberCoroutineScope()
+        val copiar: (String) -> Unit = { valor ->
+            alcance.launch {
+                portapapeles.setClipEntry(ClipEntry(ClipData.newPlainText("SecureSMS", valor)))
+            }
+        }
+
         Column(
             modifier = Modifier.padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -172,9 +188,14 @@ private fun DetalleDeClave(
             Text("Perfil: ${fila.perfil?.name ?: "sin clave"}")
 
             fila.huella?.let { huella ->
+                BloqueCopiable(
+                    etiqueta = "Huella SHA-256",
+                    valor = huellaLegible(huella),
+                    onCopiar = { copiar(huella) },
+                )
                 Text(
-                    text = "Huella: ${huellaLegible(huella)}",
-                    fontFamily = FontFamily.Monospace,
+                    text = "Comparala por otro canal. Al verificar se ignoran espacios y mayusculas.",
+                    style = MaterialTheme.typography.bodySmall,
                 )
             }
 
@@ -216,9 +237,10 @@ private fun DetalleDeClave(
                 Text("Exportar")
             }
             exportado?.let {
-                Text(
-                    text = "Base64: $it",
-                    fontFamily = FontFamily.Monospace,
+                BloqueCopiable(
+                    etiqueta = "Clave publica (Base64)",
+                    valor = it,
+                    onCopiar = { copiar(it) },
                 )
             }
 
@@ -227,6 +249,26 @@ private fun DetalleDeClave(
             }
             if (!puedeEnviar) {
                 Text("El envio se habilita solo con la clave verificada.")
+            }
+        }
+    }
+}
+
+/** Texto monoespaciado, seleccionable y con botón para copiarlo al portapapeles. */
+@Composable
+private fun BloqueCopiable(
+    etiqueta: String,
+    valor: String,
+    onCopiar: () -> Unit,
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text(etiqueta, style = MaterialTheme.typography.labelMedium)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            SelectionContainer(Modifier.weight(1f)) {
+                Text(valor, fontFamily = FontFamily.Monospace)
+            }
+            TextButton(onClick = onCopiar) {
+                Text("Copiar")
             }
         }
     }
