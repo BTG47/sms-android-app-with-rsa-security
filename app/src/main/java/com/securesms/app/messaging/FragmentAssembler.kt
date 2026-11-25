@@ -9,6 +9,12 @@ data class ClaveEnsamblado(
 /** Estado observable de un ensamblado. */
 enum class EstadoEnsamblado { INCOMPLETO, COMPLETO, EXPIRADO }
 
+/** Cantidad de partes distintas recibidas de un ensamblado y cuántas componen el mensaje. */
+data class ProgresoEnsamblado(
+    val recibidos: Int,
+    val total: Int,
+)
+
 /**
  * Agrupa Fragmentos en memoria y entrega el Envelope solo cuando el conjunto es íntegro.
  * El reloj se inyecta para controlar la expiración en las pruebas.
@@ -87,6 +93,23 @@ class FragmentAssembler(
     fun descartar(remitente: String, messageId: String) {
         barrerInactivos(reloj())
         grupos.remove(ClaveEnsamblado(remitente, messageId))
+    }
+
+    /**
+     * Devuelve cuántas partes distintas se recibieron y cuántas componen el mensaje.
+     *
+     * No altera ni elimina el grupo: `estado` sigue siendo la fuente de verdad para `EXPIRADO`.
+     * Devuelve `null` si el grupo no existe o no conserva ningún fragmento interpretable.
+     */
+    fun progreso(remitente: String, messageId: String): ProgresoEnsamblado? {
+        barrerInactivos(reloj())
+        val grupo = grupos[ClaveEnsamblado(remitente, messageId)] ?: return null
+        val fragmentos = grupo.textos.mapNotNull(::parsear).filter { it.messageId == messageId }
+        val primero = fragmentos.firstOrNull() ?: return null
+        return ProgresoEnsamblado(
+            recibidos = fragmentos.map { it.index }.distinct().size,
+            total = primero.count,
+        )
     }
 
     /**

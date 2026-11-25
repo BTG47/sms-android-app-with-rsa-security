@@ -202,4 +202,36 @@ class FragmentAssemblerTest {
         assertEquals(EstadoEnsamblado.COMPLETO, assembler.estado("5551", id))
         assertArrayEquals(envelope, assembler.envelope("5551", id))
     }
+
+    @Test
+    fun `progreso informa partes distintas y total`() {
+        val fragmentos = encode(ByteArray(300))
+        val id = fragmentos.first().split(':')[1]
+        val assembler = FragmentAssembler({ 0L })
+
+        assembler.agregar("5551", fragmentos[0])
+        assembler.agregar("5551", fragmentos[0])
+        assembler.agregar("5551", fragmentos[1])
+
+        assertEquals(ProgresoEnsamblado(2, fragmentos.size), assembler.progreso("5551", id))
+    }
+
+    @Test
+    fun `sin grupo no hay progreso`() {
+        assertNull(FragmentAssembler({ 0L }).progreso("5551", "A1B2C3D4E5F6"))
+    }
+
+    @Test
+    fun `el progreso de un expirado se conserva`() {
+        val reloj = RelojFalso()
+        val assembler = FragmentAssembler(reloj::ahora)
+        val fragmentos = encode(ByteArray(300))
+        val id = fragmentos.first().split(':')[1]
+
+        assembler.agregar("5551", fragmentos[0])
+        reloj.avanzar(5 * 60 * 1000L + 1)
+
+        assertEquals(EstadoEnsamblado.EXPIRADO, assembler.estado("5551", id))
+        assertEquals(ProgresoEnsamblado(1, fragmentos.size), assembler.progreso("5551", id))
+    }
 }
