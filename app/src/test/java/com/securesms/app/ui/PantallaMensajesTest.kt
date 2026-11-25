@@ -8,14 +8,14 @@ class PantallaMensajesTest {
     @Test
     fun `cada estado usa la etiqueta del glosario`() {
         val etiquetas = mapOf(
-            EstadoMensaje.PREPARANDO to "Preparando",
-            EstadoMensaje.CIFRADO to "Cifrado",
-            EstadoMensaje.ENVIANDO to "Enviando",
-            EstadoMensaje.ACEPTADO_PARA_ENVIO to "Aceptado para envio",
-            EstadoMensaje.INCOMPLETO to "Incompleto",
-            EstadoMensaje.RECIBIDO_Y_RECONSTRUIDO to "Recibido y reconstruido",
-            EstadoMensaje.DESCIFRADO to "Descifrado",
-            EstadoMensaje.EXPIRADO to "Expirado",
+            EstadoMensaje.PREPARANDO to "Preparing",
+            EstadoMensaje.CIFRADO to "Encrypted",
+            EstadoMensaje.ENVIANDO to "Sending",
+            EstadoMensaje.ACEPTADO_PARA_ENVIO to "Accepted for sending",
+            EstadoMensaje.INCOMPLETO to "Incomplete",
+            EstadoMensaje.RECIBIDO_Y_RECONSTRUIDO to "Received and reassembled",
+            EstadoMensaje.DESCIFRADO to "Decrypted",
+            EstadoMensaje.EXPIRADO to "Expired",
             EstadoMensaje.ERROR to "Error",
         )
         assertEquals(EstadoMensaje.entries.toSet(), etiquetas.keys)

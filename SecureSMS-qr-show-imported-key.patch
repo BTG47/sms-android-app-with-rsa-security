@@ -1,0 +1,13 @@
+diff --git a/app/src/main/java/com/securesms/app/ui/PantallaContactos.kt b/app/src/main/java/com/securesms/app/ui/PantallaContactos.kt
+index 02c659d..a5d761b 100644
+--- a/app/src/main/java/com/securesms/app/ui/PantallaContactos.kt
++++ b/app/src/main/java/com/securesms/app/ui/PantallaContactos.kt
+@@ -92,7 +92,7 @@ fun PantallaContactos(viewModel: ContactosViewModel, onIniciarConversacion: (Str
+             onImportar = {
+                 viewModel.importar(contacto.numero, claveEscaneada.perfil, claveEscaneada.materialBase64)
+                 perfil = claveEscaneada.perfil
+-                material = ""
++                material = claveEscaneada.materialBase64
+                 confirmada = ""
+                 codigoEscaneado = null
+             },

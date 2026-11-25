@@ -1,0 +1,7 @@
+modelo=Xiaomi 23122PCD1G
+android=16
+api=36
+soc=QTI SM7435
+claves=5
+mensajes=30
+calentamiento=3

@@ -9,12 +9,12 @@ class PantallaContactosTest {
 
     @Test
     fun `cada estado tiene su etiqueta del glosario`() {
-        assertEquals("Sin importar", etiquetaDe(EstadoClave.SIN_IMPORTAR))
+        assertEquals("No key imported", etiquetaDe(EstadoClave.SIN_IMPORTAR))
         assertEquals(
-            "Importada sin verificar",
+            "Imported, unverified",
             etiquetaDe(EstadoClave.IMPORTADA_SIN_VERIFICAR),
         )
-        assertEquals("Verificada", etiquetaDe(EstadoClave.VERIFICADA))
+        assertEquals("Verified", etiquetaDe(EstadoClave.VERIFICADA))
     }
 
     @Test

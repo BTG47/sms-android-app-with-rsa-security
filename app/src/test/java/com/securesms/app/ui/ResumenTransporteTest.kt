@@ -15,7 +15,7 @@ class ResumenTransporteTest {
     fun `muestra huella y cantidad de sms conocidas`() {
         val datos = DatosDeEnvio("+59170000000", "ECC_P256", "A1B2")
         assertEquals(
-            "+59170000000 | ECC_P256 | 640 bytes | SMS: 5 | huella: A1B2",
+            "+59170000000 | ECC_P256 | 640 bytes | SMS: 5 | fingerprint: A1B2",
             resumen(datos, 640, 5)
         )
     }
@@ -24,7 +24,7 @@ class ResumenTransporteTest {
     fun `marca la huella como sin verificar cuando falta`() {
         val datos = DatosDeEnvio("+59170000000", "RSA_2048", null)
         assertEquals(
-            "+59170000000 | RSA_2048 | 384 bytes | SMS: 3 | huella: sin verificar",
+            "+59170000000 | RSA_2048 | 384 bytes | SMS: 3 | fingerprint: unverified",
             resumen(datos, 384, 3)
         )
     }
@@ -33,7 +33,7 @@ class ResumenTransporteTest {
     fun `marca el numero de sms como pendiente cuando no se calculo`() {
         val datos = DatosDeEnvio("+59170000000", "RSA_3072", "C3D4")
         assertEquals(
-            "+59170000000 | RSA_3072 | 900 bytes | SMS: pendiente | huella: C3D4",
+            "+59170000000 | RSA_3072 | 900 bytes | SMS: pending | fingerprint: C3D4",
             resumen(datos, 900, null)
         )
     }

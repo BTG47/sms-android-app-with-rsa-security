@@ -67,7 +67,7 @@ class ContactosViewModel(
     init {
         cargarMiClave()
         if (repositorio.cargaFallida) {
-            publicar(aviso = "no se pudieron leer los contactos guardados")
+            publicar(aviso = "Could not load saved contacts.")
         }
     }
 
@@ -75,7 +75,7 @@ class ContactosViewModel(
     fun agregar(numero: String, nombre: String) {
         val limpio = numero.trim()
         if (limpio.isBlank()) {
-            publicar(aviso = "escribe un numero")
+            publicar(aviso = "Enter a phone number.")
             return
         }
 
@@ -94,11 +94,11 @@ class ContactosViewModel(
             onSuccess = {
                 publicar(
                     seleccionado = numero,
-                    aviso = "clave importada; aun no esta verificada",
+                    aviso = "Public key imported. Verify its fingerprint before sending.",
                 )
             },
             onFailure = {
-                publicar(seleccionado = numero, aviso = "no se pudo importar la clave")
+                publicar(seleccionado = numero, aviso = "Could not import the public key.")
             },
         )
     }
@@ -106,14 +106,14 @@ class ContactosViewModel(
     /** Verifica la clave solo si la huella confirmada coincide con la guardada. */
     fun verificar(numero: String, huellaConfirmada: String) {
         if (repositorio.claveDe(numero) == null) {
-            publicar(seleccionado = numero, aviso = "no hay clave importada")
+            publicar(seleccionado = numero, aviso = "Import a public key first.")
             return
         }
 
         val coincide = repositorio.verificarClave(numero, huellaConfirmada)
         publicar(
             seleccionado = numero,
-            aviso = if (coincide) "clave verificada" else "la huella no coincide",
+            aviso = if (coincide) "Public key verified." else "The fingerprints do not match.",
         )
     }
 
@@ -123,7 +123,7 @@ class ContactosViewModel(
         publicar(
             seleccionado = numero,
             exportado = material,
-            aviso = if (material == null) "no hay clave para exportar" else "clave exportada",
+            aviso = if (material == null) "Import a public key before exporting it." else "Public key exported.",
         )
     }
 
@@ -141,18 +141,18 @@ class ContactosViewModel(
         // Un segundo toque puede encontrar el alias ya creado por el primero: si la clave
         // existe, se publica en vez de mostrar un fallo que confundiría al usuario.
         if (resultado.isFailure && !claves.tieneClave(PERFIL_PROPIO)) {
-            publicar(aviso = "no se pudo generar la clave")
+            publicar(aviso = "Could not generate your key.")
             return
         }
 
         val base64 = claves.clavePublicaBase64(PERFIL_PROPIO).getOrNull()
         val huella = base64?.let { Huella.calcular(it).getOrNull() }
         if (base64 == null || huella == null) {
-            publicar(aviso = "no se pudo leer la clave publica")
+            publicar(aviso = "Could not read your public key.")
             return
         }
 
-        publicar(miClave = MiClaveUi(PERFIL_PROPIO, base64, huella), aviso = "clave generada")
+        publicar(miClave = MiClaveUi(PERFIL_PROPIO, base64, huella), aviso = "Your key is ready.")
     }
 
     private fun cargarMiClave() {

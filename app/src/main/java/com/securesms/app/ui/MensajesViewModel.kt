@@ -95,7 +95,7 @@ class MensajesViewModel(
         val seleccion = estado.value.contactos.find { it.numero == numero }
         estado.update {
             it.copy(seleccionado = seleccion?.numero, aviso = if (seleccion == null) {
-                "selecciona un contacto con clave verificada"
+                "Choose a contact with a verified public key."
             } else "")
         }
     }
@@ -130,15 +130,15 @@ class MensajesViewModel(
     /** Devuelve true cuando el intento ya quedó representado en la lista. */
     suspend fun enviar(texto: String): Boolean {
         val actual = estado.value
-        val contacto = actual.contactoSeleccionado ?: return avisar("selecciona un contacto")
-        if (texto.isBlank()) return avisar("escribe un mensaje")
-        if (!actual.permisoEnviar) return avisar("falta el permiso para enviar SMS")
+        val contacto = actual.contactoSeleccionado ?: return avisar("Choose a contact.")
+        if (texto.isBlank()) return avisar("Enter a message.")
+        if (!actual.permisoEnviar) return avisar("SMS send permission is required.")
         val sim = transporte.estadoSim()
         estado.update { it.copy(estadoSim = sim) }
-        if (sim != EstadoSim.LISTA) return avisar("la SIM no esta lista")
+        if (sim != EstadoSim.LISTA) return avisar("The SIM is unavailable.")
         val clavePublica = repositorio.claveDe(contacto.numero)?.takeIf { it.habilitaEnvio }
-            ?: return avisar("se requiere una clave verificada")
-        val destino = normalizarNumeroSms(contacto.numero) ?: return avisar("numero SMS invalido")
+            ?: return avisar("A verified public key is required.")
+        val destino = normalizarNumeroSms(contacto.numero) ?: return avisar("Invalid SMS phone number.")
         var mensaje = MensajeUi(
             UUID.randomUUID().toString(), null, DireccionMensaje.ENVIADO, destino,
             contacto.nombre, texto, clavePublica.perfil, EstadoMensaje.PREPARANDO,
@@ -153,7 +153,7 @@ class MensajesViewModel(
             val fallo = cifrado.exceptionOrNull() as? FalloDeCifrado
             publicar(mensaje.copy(
                 estado = EstadoMensaje.ERROR,
-                detalle = fallo?.message ?: "no se pudo preparar el mensaje",
+                detalle = fallo?.message ?: "Could not prepare the message.",
             ))
             return true
         }
@@ -171,7 +171,7 @@ class MensajesViewModel(
             val resultado = transporte.enviar(destino, fragmentos)
             publicar(
                 if (resultado.isSuccess) mensaje.copy(estado = EstadoMensaje.ACEPTADO_PARA_ENVIO)
-                else mensaje.copy(estado = EstadoMensaje.ERROR, detalle = "no se pudo enviar todo el mensaje"),
+                else mensaje.copy(estado = EstadoMensaje.ERROR, detalle = "Could not send all message fragments."),
             )
         }
         return true
@@ -221,7 +221,7 @@ class MensajesViewModel(
                 val fallo = error as? FalloDeCifrado
                 publicar(reconstruido.copy(
                     estado = if (fallo?.incompleto == true) EstadoMensaje.INCOMPLETO else EstadoMensaje.ERROR,
-                    detalle = fallo?.message ?: "no se pudo descifrar el mensaje",
+                    detalle = fallo?.message ?: "Could not decrypt the message.",
                 ))
             },
         )

@@ -1,0 +1,7 @@
+modelo=OPPO CPH2385
+android=14
+api=34
+soc=Mediatek MT6765G
+claves=5
+mensajes=30
+calentamiento=3

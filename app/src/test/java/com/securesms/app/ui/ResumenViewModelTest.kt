@@ -61,7 +61,7 @@ class ResumenViewModelTest {
         viewModel.cifrar("Hola", Perfil.RSA_2048)
 
         assertEquals(
-            "sin destinatario | RSA_2048 | 9 bytes | SMS: 1 | huella: sin verificar",
+            "No recipient | RSA_2048 | 9 bytes | SMS: 1 | fingerprint: unverified",
             viewModel.uiState.value.resumen,
         )
     }
@@ -83,7 +83,7 @@ class ResumenViewModelTest {
 
         viewModel.cifrar("Hola", Perfil.RSA_2048)
 
-        assertEquals("error al cifrar", viewModel.uiState.value.resumen)
+        assertEquals("Encryption failed", viewModel.uiState.value.resumen)
         assertNull(viewModel.uiState.value.envelope)
         assertFalse(viewModel.uiState.value.resumen.contains("secreto-del-gateway"))
     }
@@ -94,7 +94,7 @@ class ResumenViewModelTest {
 
         viewModel.cifrar("Hola", Perfil.RSA_2048)
 
-        assertEquals("error al cifrar", viewModel.uiState.value.resumen)
+        assertEquals("Encryption failed", viewModel.uiState.value.resumen)
         assertNull(viewModel.uiState.value.envelope)
     }
 }
