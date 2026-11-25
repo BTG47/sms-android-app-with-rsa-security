@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
-import android.security.keystore.StrongBoxUnavailableException
 import com.securesms.app.integration.Perfil
 import java.security.KeyPairGenerator
 import java.security.KeyStore
@@ -39,14 +38,24 @@ class AlmacenDeClavesAndroid(private val context: Context) : AlmacenDeClaves {
     }
 
     private fun generar(perfil: Perfil) {
-        val strongBox = context.packageManager
+        val anunciaStrongBox = context.packageManager
             .hasSystemFeature(PackageManager.FEATURE_STRONGBOX_KEYSTORE)
 
-        try {
-            generarCon(perfil, strongBox)
-        } catch (_: StrongBoxUnavailableException) {
+        if (!anunciaStrongBox) {
             generarCon(perfil, strongBox = false)
+            return
         }
+
+        // D-018: StrongBox es una optimización opcional. El hardware puede anunciarla y aun
+        // así rechazar un perfil concreto (se observó con P-384 en el Samsung); se degrada a
+        // TEE. Un intento fallido puede dejar un alias a medias, que se limpia antes de repetir.
+        val enStrongBox = runCatching { generarCon(perfil, strongBox = true) }
+        if (enStrongBox.isSuccess) return
+
+        runCatching {
+            if (keyStore.containsAlias(alias(perfil))) keyStore.deleteEntry(alias(perfil))
+        }
+        generarCon(perfil, strongBox = false)
     }
 
     private fun generarCon(perfil: Perfil, strongBox: Boolean) {

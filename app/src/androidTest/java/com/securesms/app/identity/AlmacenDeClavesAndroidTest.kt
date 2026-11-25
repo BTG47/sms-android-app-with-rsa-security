@@ -32,6 +32,12 @@ class AlmacenDeClavesAndroidTest {
     private fun publica(perfil: Perfil): ByteArray =
         Base64.getDecoder().decode(almacen.clavePublicaBase64(perfil).getOrThrow())
 
+    /** Genera y, si falla, muestra la causa real en el mensaje de la aserción. */
+    private fun generar(perfil: Perfil) {
+        val resultado = almacen.generarSiFalta(perfil)
+        assertTrue("$perfil: ${resultado.exceptionOrNull()}", resultado.isSuccess)
+    }
+
     @After
     fun limpiar() {
         Perfil.entries.forEach { perfil ->
@@ -42,7 +48,7 @@ class AlmacenDeClavesAndroidTest {
 
     @Test
     fun `genera RSA-2048 y la privada no es exportable`() {
-        assertTrue(almacen.generarSiFalta(Perfil.RSA_2048).isSuccess)
+        generar(Perfil.RSA_2048)
 
         assertTrue(almacen.tieneClave(Perfil.RSA_2048))
         assertTrue(publica(Perfil.RSA_2048).isNotEmpty())
@@ -51,18 +57,18 @@ class AlmacenDeClavesAndroidTest {
 
     @Test
     fun `no regenera si ya existe`() {
-        almacen.generarSiFalta(Perfil.RSA_2048).getOrThrow()
+        generar(Perfil.RSA_2048)
         val primera = publica(Perfil.RSA_2048)
 
-        almacen.generarSiFalta(Perfil.RSA_2048).getOrThrow()
+        generar(Perfil.RSA_2048)
 
         assertArrayEquals(primera, publica(Perfil.RSA_2048))
     }
 
     @Test
     fun `genera P-256 y P-384 con proposito de acuerdo`() {
-        assertTrue(almacen.generarSiFalta(Perfil.ECC_P256).isSuccess)
-        assertTrue(almacen.generarSiFalta(Perfil.ECC_P384).isSuccess)
+        generar(Perfil.ECC_P256)
+        generar(Perfil.ECC_P384)
 
         assertTrue(almacen.tieneClave(Perfil.ECC_P256))
         assertTrue(almacen.tieneClave(Perfil.ECC_P384))
@@ -72,8 +78,8 @@ class AlmacenDeClavesAndroidTest {
 
     @Test
     fun `los alias son estables y distintos por perfil`() {
-        almacen.generarSiFalta(Perfil.RSA_2048).getOrThrow()
-        almacen.generarSiFalta(Perfil.ECC_P256).getOrThrow()
+        generar(Perfil.RSA_2048)
+        generar(Perfil.ECC_P256)
 
         assertTrue(keyStore.containsAlias("securesms.rsa_2048.v1"))
         assertTrue(keyStore.containsAlias("securesms.ecc_p256.v1"))
@@ -84,14 +90,19 @@ class AlmacenDeClavesAndroidTest {
         val anuncia =
             contexto.packageManager.hasSystemFeature(PackageManager.FEATURE_STRONGBOX_KEYSTORE)
 
-        assertTrue(almacen.generarSiFalta(Perfil.RSA_2048).isSuccess)
+        Perfil.entries.forEach { perfil ->
+            generar(perfil)
 
-        val privada = keyStore.getKey(alias(Perfil.RSA_2048), null)
-        val nivel = KeyFactory.getInstance(privada.algorithm, "AndroidKeyStore")
-            .getKeySpec(privada, KeyInfo::class.java)
-            .securityLevel
+            val privada = keyStore.getKey(alias(perfil), null)
+            val nivel = KeyFactory.getInstance(privada.algorithm, "AndroidKeyStore")
+                .getKeySpec(privada, KeyInfo::class.java)
+                .securityLevel
 
-        Log.i("SecureSMS", "strongbox anunciado=$anuncia nivel=$nivel")
-        assertTrue(nivel >= 1)
+            Log.i(
+                "SecureSMS",
+                "strongbox anunciado=$anuncia perfil=${perfil.name} nivel=$nivel",
+            )
+            assertTrue("${perfil.name} nivel=$nivel", nivel >= 1)
+        }
     }
 }
