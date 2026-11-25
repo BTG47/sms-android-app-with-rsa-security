@@ -20,8 +20,8 @@ data class DatosDeEnvio(
  * Los datos ausentes se vuelven texto explícito; no se usa el operador `!!`.
  */
 fun resumen(datos: DatosDeEnvio, bytesEnvelope: Int, cantidadSms: Int?): String {
-    val sms: String = cantidadSms?.toString() ?: "pendiente"
-    val huella = datos.huella ?: "sin verificar"
+    val sms: String = cantidadSms?.toString() ?: "pending"
+    val huella = datos.huella ?: "unverified"
     return "${datos.numero} | ${datos.perfil} | $bytesEnvelope bytes | " +
-        "SMS: $sms | huella: $huella"
+        "SMS: $sms | fingerprint: $huella"
 }

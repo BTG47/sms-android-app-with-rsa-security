@@ -9,16 +9,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -60,6 +64,7 @@ class MainActivity : ComponentActivity() {
         private val inicializado get() = ::repositorio.isInitialized
     }
 
+    @OptIn(ExperimentalLayoutApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,7 +80,7 @@ class MainActivity : ComponentActivity() {
             initializer {
                 MensajesViewModel(
                     repositorio, CryptoGatewayReal(almacenClaves::parParaDescifrar),
-                    TransporteSmsAndroid(contexto), RegistroSmsAndroid(contexto),
+                    TransporteSmsAndroid(contexto), RegistroSmsAndroid(),
                 )
             }
         })
@@ -84,40 +89,49 @@ class MainActivity : ComponentActivity() {
         val mensajes = proveedor[MensajesViewModel::class.java]
 
         setContent {
-            MaterialTheme {
-                var pantalla by rememberSaveable { mutableStateOf(Pantalla.CONTACTOS) }
+            val colores = if (isSystemInDarkTheme()) {
+                dynamicDarkColorScheme(contexto)
+            } else {
+                dynamicLightColorScheme(contexto)
+            }
+            MaterialTheme(colorScheme = colores) {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    var pantalla by rememberSaveable { mutableStateOf(Pantalla.CONTACTOS) }
 
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .safeDrawingPadding(),
-                ) {
-                    Surface(tonalElevation = 2.dp) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 8.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        ) {
-                            TextButton(onClick = { pantalla = Pantalla.CONTACTOS }) {
-                                Text("Contactos")
-                            }
-                            TextButton(onClick = { pantalla = Pantalla.MENSAJES }) {
-                                Text("Mensajes")
-                            }
-                            TextButton(onClick = { pantalla = Pantalla.RESUMEN }) {
-                                Text("Resumen demo")
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .safeDrawingPadding(),
+                    ) {
+                        Surface(tonalElevation = 2.dp) {
+                            FlowRow(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 8.dp),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            ) {
+                                listOf(
+                                    Pantalla.CONTACTOS to "Contacts",
+                                    Pantalla.MENSAJES to "Messages",
+                                    Pantalla.RESUMEN to "Diagnostics",
+                                ).forEach { (destino, etiqueta) ->
+                                    FilterChip(
+                                        selected = pantalla == destino,
+                                        onClick = { pantalla = destino },
+                                        label = { Text(etiqueta) },
+                                    )
+                                }
                             }
                         }
-                    }
 
-                    when (pantalla) {
-                        Pantalla.CONTACTOS -> PantallaContactos(contactos) { numero ->
-                            mensajes.seleccionar(numero)
-                            pantalla = Pantalla.MENSAJES
+                        when (pantalla) {
+                            Pantalla.CONTACTOS -> PantallaContactos(contactos) { numero ->
+                                mensajes.seleccionar(numero)
+                                pantalla = Pantalla.MENSAJES
+                            }
+                            Pantalla.MENSAJES -> PantallaMensajes(mensajes) { pantalla = Pantalla.CONTACTOS }
+                            Pantalla.RESUMEN -> ResumenPantalla(resumen)
                         }
-                        Pantalla.MENSAJES -> PantallaMensajes(mensajes)
-                        Pantalla.RESUMEN -> ResumenPantalla(resumen)
                     }
                 }
             }
@@ -131,13 +145,13 @@ private fun ResumenPantalla(viewModel: ResumenViewModel) {
     val estado by viewModel.uiState.collectAsState()
 
     Column {
-        Text("SecureSMS")
+        Text("Diagnostics", style = MaterialTheme.typography.headlineSmall)
         if (viewModel.esDemo) {
-            Text("modo demo")
+            Text("See the encrypted payload size using a demo. No SMS is sent.")
         }
         Text(estado.resumen)
-        Button(onClick = { viewModel.cifrar("Hola", Perfil.RSA_2048) }) {
-            Text("Cifrar demo")
+        Button(onClick = { viewModel.cifrar("Hello", Perfil.RSA_2048) }) {
+            Text("Run encryption demo")
         }
     }
 }

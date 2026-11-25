@@ -1,43 +1,59 @@
+// Conecta el receptor del manifiesto con la sesión de mensajes en el hilo principal.
 package com.securesms.app.messaging
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.os.Build
-import android.provider.Telephony
+import android.os.SystemClock
 
-/** Escucha la acción protegida de telefonía durante la suscripción. */
-class RegistroSmsAndroid(context: Context) : RegistroSms {
-    private val contexto = context.applicationContext
-    private var receptor: BroadcastReceiver? = null
-
+/** Entrega al ViewModel los fragmentos recibidos antes y durante el inicio de la sesión. */
+class RegistroSmsAndroid : RegistroSms {
     override fun registrar(alRecibir: (remitente: String, cuerpo: String) -> Unit) {
-        if (receptor != null) return
-        val accionSms = Telephony.Sms.Intents.SMS_RECEIVED_ACTION
-        val nuevo = object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                if (intent.action != accionSms) return
-                Telephony.Sms.Intents.getMessagesFromIntent(intent).forEach { mensaje ->
-                    val remitente = mensaje?.originatingAddress ?: return@forEach
-                    val cuerpo = mensaje.messageBody ?: return@forEach
-                    alRecibir(remitente, cuerpo)
-                }
-            }
-        }
-        val filtro = IntentFilter(accionSms)
-        // Telefonía puede emitir esta acción protegida desde un UID distinto al del sistema.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            contexto.registerReceiver(nuevo, filtro, Context.RECEIVER_EXPORTED)
-        } else {
-            contexto.registerReceiver(nuevo, filtro)
-        }
-        receptor = nuevo
+        RegistroSmsEntrantes.suscribir(alRecibir)
     }
 
     override fun cancelar() {
-        val activo = receptor ?: return
-        contexto.unregisterReceiver(activo)
-        receptor = null
+        RegistroSmsEntrantes.cancelar()
+    }
+}
+
+/** Conserva temporalmente fragmentos cifrados mientras no hay ViewModel suscrito. */
+internal object RegistroSmsEntrantes {
+    private const val MAX_PENDIENTES = 16 * 99
+    private const val VIGENCIA_MS = 5 * 60 * 1000L
+
+    private data class Pendiente(val remitente: String, val cuerpo: String, val recibidoEn: Long)
+
+    private val pendientes = ArrayDeque<Pendiente>()
+    private var listener: ((String, String) -> Unit)? = null
+
+    fun suscribir(alRecibir: (String, String) -> Unit) {
+        if (listener != null) return
+        listener = alRecibir
+        purgarVencidos(SystemClock.elapsedRealtime())
+        while (pendientes.isNotEmpty()) {
+            val sms = pendientes.removeFirst()
+            alRecibir(sms.remitente, sms.cuerpo)
+        }
+    }
+
+    fun cancelar() {
+        listener = null
+    }
+
+    fun entregar(remitente: String, cuerpo: String) {
+        val activo = listener
+        if (activo != null) {
+            activo(remitente, cuerpo)
+            return
+        }
+
+        val ahora = SystemClock.elapsedRealtime()
+        purgarVencidos(ahora)
+        if (pendientes.size == MAX_PENDIENTES) pendientes.removeFirst()
+        pendientes.addLast(Pendiente(remitente, cuerpo, ahora))
+    }
+
+    private fun purgarVencidos(ahora: Long) {
+        while (pendientes.firstOrNull()?.let { ahora - it.recibidoEn >= VIGENCIA_MS } == true) {
+            pendientes.removeFirst()
+        }
     }
 }

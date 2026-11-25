@@ -100,7 +100,7 @@ class MensajesViewModelTest {
         val error = modelo.uiState.value.mensajes.first()
         assertEquals(EstadoMensaje.ERROR, error.estado)
         assertEquals("Hola", error.texto)
-        assertEquals("no se pudo enviar todo el mensaje", error.detalle)
+        assertEquals("Could not send all message fragments.", error.detalle)
     }
 
     @Test
@@ -113,7 +113,7 @@ class MensajesViewModelTest {
         val incompleto = modelo.uiState.value.mensajes.single()
         assertEquals(EstadoMensaje.INCOMPLETO, incompleto.estado)
         assertEquals("Ana", incompleto.contacto)
-        assertEquals("1 de 3 fragmentos", detalleDe(incompleto))
+        assertEquals("1 of 3 fragments", detalleDe(incompleto))
         assertNull(incompleto.texto)
         assertNull(incompleto.perfil)
 
@@ -150,6 +150,6 @@ class MensajesViewModelTest {
         val error = modelo.uiState.value.mensajes.single()
         assertEquals(EstadoMensaje.ERROR, error.estado)
         assertNull(error.texto)
-        assertEquals("no se pudo descifrar el mensaje", error.detalle)
+        assertEquals("Could not decrypt the message.", error.detalle)
     }
 }

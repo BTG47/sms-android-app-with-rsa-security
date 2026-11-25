@@ -41,6 +41,7 @@ kotlin {
 
 dependencies {
     implementation(project(":crypto"))
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     val composeBom = platform("androidx.compose:compose-bom:2026.02.01")
     implementation(composeBom)
 

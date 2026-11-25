@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 /** Texto fijo para no exponer el motivo de un fallo en la interfaz. */
-private const val TEXTO_ERROR = "error al cifrar"
+private const val TEXTO_ERROR = "Encryption failed"
 
 /**
  * Estado que consume la pantalla: solo el resumen y los bytes del Envelope.
@@ -51,7 +51,7 @@ class ResumenViewModel(private val gateway: CryptoGateway) : ViewModel() {
                     UiState(
                         resumen = resumen(
                             DatosDeEnvio(
-                                numero = "sin destinatario",
+                                numero = "No recipient",
                                 perfil = perfil.name,
                                 huella = null,
                             ),
