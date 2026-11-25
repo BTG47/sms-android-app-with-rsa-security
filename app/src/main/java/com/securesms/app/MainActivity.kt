@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.securesms.app.identity.AlmacenDeClavesAndroid
 import com.securesms.app.identity.ArchivoContactos
 import com.securesms.app.identity.RepositorioContactos
+import com.securesms.app.integration.CryptoGatewayReal
 import com.securesms.app.integration.FakeCryptoGateway
 import com.securesms.app.integration.Perfil
 import com.securesms.app.ui.ContactosViewModel
@@ -73,7 +74,7 @@ class MainActivity : ComponentActivity() {
             initializer { ResumenViewModel(FakeCryptoGateway()) }
             initializer {
                 MensajesViewModel(
-                    repositorio, FakeCryptoGateway(),
+                    repositorio, CryptoGatewayReal(almacenClaves::parParaDescifrar),
                     TransporteSmsAndroid(contexto), RegistroSmsAndroid(contexto),
                 )
             }

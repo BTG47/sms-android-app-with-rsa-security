@@ -6,8 +6,10 @@ import android.os.Build
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import com.securesms.app.integration.Perfil
+import java.security.KeyPair
 import java.security.KeyPairGenerator
 import java.security.KeyStore
+import java.security.PrivateKey
 import java.security.spec.ECGenParameterSpec
 import java.util.Base64
 
@@ -18,9 +20,13 @@ import java.util.Base64
  * MGF1-SHA1 explícito (D-022); las curvas usan el propósito de acuerdo para ECDH. StrongBox se
  * intenta solo si el dispositivo lo anuncia y se degrada por clave si lo rechaza (D-018).
  *
- * La clave privada nunca sale del Keystore: no hay operación que la devuelva, solo su pública.
+ * La integración usa una referencia a la clave privada no exportable para descifrar.
  */
-class AlmacenDeClavesAndroid(private val context: Context) : AlmacenDeClaves {
+class AlmacenDeClavesAndroid internal constructor(
+    private val context: Context,
+    private val prefijoAlias: String,
+) : AlmacenDeClaves {
+    constructor(context: Context) : this(context, "securesms")
 
     private val keyStore: KeyStore = KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
 
@@ -35,6 +41,14 @@ class AlmacenDeClavesAndroid(private val context: Context) : AlmacenDeClaves {
         val certificado = keyStore.getCertificate(alias(perfil))
             ?: error("no hay clave para ${perfil.name}")
         Base64.getEncoder().encodeToString(certificado.publicKey.encoded)
+    }
+
+    /** Recupera el par para JCA sin extraer los bytes de la clave privada. */
+    internal fun parParaDescifrar(perfil: Perfil): KeyPair? {
+        val alias = alias(perfil)
+        val publica = keyStore.getCertificate(alias)?.publicKey ?: return null
+        val privada = keyStore.getKey(alias, null) as? PrivateKey ?: return null
+        return KeyPair(publica, privada)
     }
 
     private fun generar(perfil: Perfil) {
@@ -85,7 +99,7 @@ class AlmacenDeClavesAndroid(private val context: Context) : AlmacenDeClaves {
             .generateKeyPair()
     }
 
-    private fun alias(perfil: Perfil): String = "securesms.${perfil.name.lowercase()}.v1"
+    private fun alias(perfil: Perfil): String = "$prefijoAlias.${perfil.name.lowercase()}.v1"
 
     private fun proposito(perfil: Perfil): Int = when (perfil) {
         Perfil.RSA_2048, Perfil.RSA_3072 ->

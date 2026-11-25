@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "SecureSMS"
 
-include(":app")
+include(":app", ":crypto")
