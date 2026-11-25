@@ -1,0 +1,565 @@
+{
+  "format": "SecureSMS envelope v1",
+  "warning": "TEST KEYS ONLY. Private keys are published here on purpose; never use them for real messages.",
+  "generated_at": "2026-11-19T19:06:17.518779605Z",
+  "keys": [
+    {
+      "key_name": "test-RSA_2048",
+      "profile": "RSA_2048",
+      "public_key_compact": "SSPK1:RSA_2048:MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnB_vPSzlHdzu0l_4rlFghK4NkngKhmG0si6EMSO3a_qr-ViJuaqcgW0cEKqRjZfMX3n43VPR3oXceBTwspLZGwftkgysqiFXelYds-iEXjBeE-9osY7AsFNYBkQr089tmtyygm48rV7jVblfjEtxkQ6f5vFSFTqPGaCu1Uo6r59ilcNlr_rCQdoDiBxFf0gNKFEkZbsdrwnJm51GHBl54s5t7Z-lzxLHFfzQzYWZlCr-oU0eveeH11TCnpCCA6FEeVrpHKC6WOUytKVK_sWRtFRVKcJtH54QJHbWiM7gs8iEsv2609fVDyWzGYW38qZHwWey_ufU0UCjIZ2wHed0xQIDAQAB",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnB/vPSzlHdzu0l/4rlFg\nhK4NkngKhmG0si6EMSO3a/qr+ViJuaqcgW0cEKqRjZfMX3n43VPR3oXceBTwspLZ\nGwftkgysqiFXelYds+iEXjBeE+9osY7AsFNYBkQr089tmtyygm48rV7jVblfjEtx\nkQ6f5vFSFTqPGaCu1Uo6r59ilcNlr/rCQdoDiBxFf0gNKFEkZbsdrwnJm51GHBl5\n4s5t7Z+lzxLHFfzQzYWZlCr+oU0eveeH11TCnpCCA6FEeVrpHKC6WOUytKVK/sWR\ntFRVKcJtH54QJHbWiM7gs8iEsv2609fVDyWzGYW38qZHwWey/ufU0UCjIZ2wHed0\nxQIDAQAB\n-----END PUBLIC KEY-----\n",
+      "private_key_pkcs8_base64": "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCcH+89LOUd3O7SX/iuUWCErg2SeAqGYbSyLoQxI7dr+qv5WIm5qpyBbRwQqpGNl8xfefjdU9Hehdx4FPCyktkbB+2SDKyqIVd6Vh2z6IReMF4T72ixjsCwU1gGRCvTz22a3LKCbjytXuNVuV+MS3GRDp/m8VIVOo8ZoK7VSjqvn2KVw2Wv+sJB2gOIHEV/SA0oUSRlux2vCcmbnUYcGXnizm3tn6XPEscV/NDNhZmUKv6hTR6954fXVMKekIIDoUR5WukcoLpY5TK0pUr+xZG0VFUpwm0fnhAkdtaIzuCzyISy/brT19UPJbMZhbfypkfBZ7L+59TRQKMhnbAd53TFAgMBAAECggEAQ1BPhahUNt55h/ICFiKXA03KI0Mngo4g6ww8SbWVEXTYbh8a7pbdeL4y8gqgzBRNdULxJnhLze4YQxwANXY0Lj/qUeSuE4Jhpaj4kIepfrTK8zxvftLGSJ/+nWEKJn5SSwlp2+ustLFrQhw1Upd6pSjRj7Cvi+CeL1YE24hwKiTYpjUkrjRLTHEJgJf83ZgYGJYk6AvarlXsDtdMEfUh83A9AgjfHy0uR4/JYvfiZuz4Kx2HvRaOaNyribSwIEzODOTbg//vp802tk+YIzQ4jYjyxd/VvQ91BYscuHsKTXHDOh+q+haY3EpOB3r/Ch39AqvGHEvLscY3g8QJVcQcVwKBgQC2FQ0ZuTqOAfhDWowj5Ep4Wg/4watsKz5iMe0YWWc4uX7TLPpEGJDkGQZ2ueaHXCSeVBwqlvVwW69jVFcw+jmAqM6euH9He/7ihgj6SPGMt3fUBsUOfqZ6JxSWMNJrPtgtEZDZ1204o/mhpL77U8WMrV55u+xIxIbtXBNQuTMUNwKBgQDbgT51WvCECsm6nlqWfZGq4zCSp4BuqjdrzxwyHbNmxKnJb35PQxdOjb4q53c2pnhnGs66Xy103R2kjujA1L2wozxmy4t+MvuuRw92SbIMFXV35tlxFaysdne3Xw8/FGMlt16G8TaYImSMi57a6B4WaMeHL1UmMY34j6SXSRO44wKBgGZi5/7y/U4lJWkaXXtBP+71Fc4XeUFV/7pPwLbUbwqipAIzZHcuKStaNxxD5LFwytaNDVmVkWYg6Dq+jljoG7WRNr5hmJCl1Omj3SCAK/OopyT+uYgxB4Pgvd7GjUvpBr4xBna4gJ489n5CmXHR5V/5jQp+9Zrlh8mo4OOfgG15AoGAAhK/b0ZTnTuo2h1ix6cZ+B47ODdizCjJazhCkOqc5iyXWfK2o7MDhldqY2daRebenkKvjy0U9dSc0hATfLbFr+RqzqG/iIqcu/Gp4LkjeF+/g0ln5lyJC/v2d4HrV/IuWY3Y07d1h4xTnMw4zOKCXj3RHKLC0CCJsb5RlKg5CncCgYEArzY5zWKcsBRCqQdZIkj7AET+JDwtRk2PB12LZUjLJ50W5fSvL60veOIQ3LsFqqx19zRy55IQSuLp/FrdtDX+EuR7wOOfE/QKBKQYdHvhJ2euOE+3pwV3tE+5eyYbTCBiC4IjgjUBukjTJD8tQnssTTDO/oseoz5c+Ka+7JrdAck=",
+      "fingerprint": "BF13 250D D24A 55A8 75CA 6B2B 2EC9 E6D8 84A9 98C9 673B 9B36 EB1F DFB5 F5B4 727B",
+      "key_id_hex": "BF13250D"
+    },
+    {
+      "key_name": "test-RSA_3072",
+      "profile": "RSA_3072",
+      "public_key_compact": "SSPK1:RSA_3072:MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAun63eCx-qBJgK8JYhhFNbR6kze9xim1UbrVjw4jZql7vTQldzL3HM3U-Eu64-q4c_H88XKH7FUwVEFxMH-EqRPJJq7zO1mSJHhWbgUWJMVWYFP8RPx5FyeuDWKB0SZ5aFg6cdXZsm5Fo3ny75p3W6SFpTooxGILqCmo3LW4063SopbnItydT7KQByogfBpjtgNwy2SMup2lOkQFTV-G7jqmsxnExHHb06N22xjPBq0No1f9NIm6_AE2L3W-kK5hzrpgnizNYzqeCvVFAH8MTFv07QDP9incoXIXtARuKEKoGmrJThngdScQFKYvwr7RVqyjsZTHl5BTlH1Zvn37B3O0nclG6rzzlDjf5X0QuKvaLJHWd2o1oFTmIST0iZGNatXPCM_7YiiWoMp26D46HQkynU8ElljE4G2Ma7WztXvxLlwuOq4f7nNiC-Su4xbmV385VysKIhaC_2RJQopCx9bLu4Ktua-gB6AEvUOOzP0ywNF1A6O1kqurogSK_41y3AgMBAAE",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAun63eCx+qBJgK8JYhhFN\nbR6kze9xim1UbrVjw4jZql7vTQldzL3HM3U+Eu64+q4c/H88XKH7FUwVEFxMH+Eq\nRPJJq7zO1mSJHhWbgUWJMVWYFP8RPx5FyeuDWKB0SZ5aFg6cdXZsm5Fo3ny75p3W\n6SFpTooxGILqCmo3LW4063SopbnItydT7KQByogfBpjtgNwy2SMup2lOkQFTV+G7\njqmsxnExHHb06N22xjPBq0No1f9NIm6/AE2L3W+kK5hzrpgnizNYzqeCvVFAH8MT\nFv07QDP9incoXIXtARuKEKoGmrJThngdScQFKYvwr7RVqyjsZTHl5BTlH1Zvn37B\n3O0nclG6rzzlDjf5X0QuKvaLJHWd2o1oFTmIST0iZGNatXPCM/7YiiWoMp26D46H\nQkynU8ElljE4G2Ma7WztXvxLlwuOq4f7nNiC+Su4xbmV385VysKIhaC/2RJQopCx\n9bLu4Ktua+gB6AEvUOOzP0ywNF1A6O1kqurogSK/41y3AgMBAAE=\n-----END PUBLIC KEY-----\n",
+      "private_key_pkcs8_base64": "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",
+      "fingerprint": "8A39 4897 A22E C086 D9C8 B615 2216 851F 781B 72E9 F19D 357E 1F69 0512 8D49 B483",
+      "key_id_hex": "8A394897"
+    },
+    {
+      "key_name": "test-ECC_P256",
+      "profile": "ECC_P256",
+      "public_key_compact": "SSPK1:ECC_P256:MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE865jpuzQs_aKojLWSdvnsj_gGIuJt1cdo78_MPmtC5zB_wuZsMgMWSsp-7hicmjLBu6R9GsfkPRj-eg4_POhcw",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE865jpuzQs/aKojLWSdvnsj/gGIuJ\nt1cdo78/MPmtC5zB/wuZsMgMWSsp+7hicmjLBu6R9GsfkPRj+eg4/POhcw==\n-----END PUBLIC KEY-----\n",
+      "private_key_pkcs8_base64": "MEECAQAwEwYHKoZIzj0CAQYIKoZIzj0DAQcEJzAlAgEBBCAIQBgyByB0xYiAXp3C+ZgJ+u5X7vjqAYGDIE/MYWFBGw==",
+      "fingerprint": "DCEB FADA 6A17 32A9 459B 71DC 145B EBF0 EC64 C5E2 B990 1341 2858 1EB4 7ABC C4EE",
+      "key_id_hex": "DCEBFADA"
+    },
+    {
+      "key_name": "test-ECC_P384",
+      "profile": "ECC_P384",
+      "public_key_compact": "SSPK1:ECC_P384:MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEX3dZYNTeIW8zB59vd1mAcwBDYz3C4lfcEd5AZiYcATV2qWbx3-OIBZsklobpqBiTpO9305ML4-qKoMEF8e5c_BgVcpSVIzL42jhVIMiNfRtI-brNYGzwUvDFxPHKOzK-",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEX3dZYNTeIW8zB59vd1mAcwBDYz3C4lfc\nEd5AZiYcATV2qWbx3+OIBZsklobpqBiTpO9305ML4+qKoMEF8e5c/BgVcpSVIzL4\n2jhVIMiNfRtI+brNYGzwUvDFxPHKOzK+\n-----END PUBLIC KEY-----\n",
+      "private_key_pkcs8_base64": "ME4CAQAwEAYHKoZIzj0CAQYFK4EEACIENzA1AgEBBDBntwKHZ3abVSlmEZv6bknc21DOLh8NIKTvGkTZ3TNVLyjuQLtATU6ku8i57uuCxC0=",
+      "fingerprint": "18EE 3CB7 E305 EF40 14B5 5353 BD35 14BB 8179 608A 0DDB D3CA 0755 A027 368F 198A",
+      "key_id_hex": "18EE3CB7"
+    }
+  ],
+  "vectors": [
+    {
+      "id": "rsa_2048-ok-empty",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Valid RSA-2048 envelope, 0-char 'empty' message",
+      "envelope_base64": "U1MBAb8TJQ0bwylpii4cYnzBReFgbnQ2eXStWhc7+zeHm92IbGkNiLR6xeKB/3stU+xGuN2L7OGgQLa5W2XMakU0uzSdhVgwLXFGtG82YFvB7fm91TrRPOvGy5ACM/VfI+SG1qxN8u2o1TOtlPdxSAaTbqV8c5ePZFS6YrelmojxSMkCgSSjNuiCKd+dX6ZyTA8DUDSCiCb8nJY7wj7lixvWZA9bQEYNMiJF7mbxv7X7VY/iX8pHzSlZD0imwC+Pgza1aDrjUPNgCXy90YlYEXmFKUb8+57n3ngyrTfZh+iUDPwrMbf6i8t2xLo+FsR8imL48AkD3kL6g3cSTOPPopLhHbq5mXb4MxmJRslTj4/lZ3MZ4khd1w==",
+      "envelope_length": 280,
+      "expected_result": "OK",
+      "expected_plaintext": ""
+    },
+    {
+      "id": "rsa_2048-ok-short",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Valid RSA-2048 envelope, 10-char 'short' message",
+      "envelope_base64": "U1MBAb8TJQ1EgQmInrj5Mp8i36gQlEIG9rPzWQk6CsUsH3+I9kjaOfu1Er4+l1ADQnDHFyuUetl7AaU37I1eJ7Lio4vuwdFrp63MkUJbh5Z08TgeCDy+b0AypgsL2kdL/hfZLkdHRmo2dGmce6BUzrCJCFM7/6khhJZEt2vgTU2VirF4/dR94tqCZnUHLCYYGMubADdH6JJq3uIdgTGK5cY92tgZEWcJYQMaq4ic1jIWi354+2X1gXdKfEK/tiR5V2+QSOUJwGGPxy2LRX5CcQbG1K5B/LIyIL/lr7msS1f60w9L0W7Em3iTtN7iTPlcV9UNEm2ZLBqwuFrrGJqMzLsUYSc2M2gjOskeOGhGbqFUn+FAgUjWTnT+mTSeBM+8nGg=",
+      "envelope_length": 290,
+      "expected_result": "OK",
+      "expected_plaintext": "Hola Bruno"
+    },
+    {
+      "id": "rsa_2048-ok-sms160",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Valid RSA-2048 envelope, 160-char 'sms160' message",
+      "envelope_base64": "U1MBAb8TJQ2GkiuXOIRytySQZYfzVxSAElQrdaGoABnpb7HS1eLltk4DlC9tNXhfE4kbWk/coGB/STKM6ddTPn1xDeZY6yPlc+C9JDrGW9XLZ1owOJ8vO1B8etxKooiaW3XZyxtyW1vrPIzhJUvEj2gmevufNpgF7z25nau5QG+Dcqh6iG+xKyNu02aXzjXTs50HjizBZ8ZPr79Nm6kvZHxVq4G4ELr4YBzeA2zgwSOWJzZ3lNyn1P5Dg2AC8C7yn+anEM/W/s5lx1wVOcWifQM0HNH5SWRFeFf6/QQPz2Q9thLrzRSs1uhIapWlXHlmqmzyaY67Sn5L/At1UPCQnRbVSDPqShgPZBTXlbebgdGwcSiZcrmMjT8F9ZROdo/XpExOma5SArqVLtxe0i7YFwsWoBJtOq9hQfR4N3yqfUH0PT/w8snuVqTugQpXWJd+EfUTP2igLS9gDcbvVVurWat+PIGTSE39pP0VdWB27MhfQRRebfIydi34OrZvo03u5OnSMPoj2ngzRzzc4d/qCAMnH8LENJFsZKYXgKkgHnGrohp8jjlQ+QTHo4n7GA6hsWkVWa3Dib4=",
+      "envelope_length": 440,
+      "expected_result": "OK",
+      "expected_plaintext": "Este mensaje tiene exactamente ciento sesenta caracteres para medir el tamano de un SMS normal sin acentos ni simbolos raros!!. Relleno relleno relleno relleno."
+    },
+    {
+      "id": "rsa_2048-ok-unicode",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Valid RSA-2048 envelope, 30-char 'unicode' message",
+      "envelope_base64": "U1MBAb8TJQ0QqhmFGUiLofIhQ2+eaIMWldmTjhVwtRmUwQV6w6C9hgq/3SRMk5UXTUstJahLshyuErjmx7oHotT9eBnjT/nupD6H2OjdsVqtvxMlTqIOzy92IvOZTOo9Gm4GPbtk/f2WFXlP8tQ4s8/nnHMCINSrulr3uEskWBH1e/l7Ib670vFF0Vvail/fKpSxNLrdVxLcgkZLb/T1hTKgEeE81SxbIFCG0cSlQIV58LEwWDuminy1GBSLSbqiEw4CaMQCh3GQTShbIl/GVv7f4fwmDLJfsLDMtWVKMSnDWSyaOzyiK1gLfsXUPbYVwOwbDaaB5ly4QnLAHlamQCNCX5fjY6v4H+FERFL2um0zGJeP28GkZBk6Sb08UxBMvDDLwKt3G3Dywrebgie5PYCwCnJRoybB4TBPSD0XbEnyKRqa",
+      "envelope_length": 324,
+      "expected_result": "OK",
+      "expected_plaintext": "¡Hola! Ñandú, café y 😀🔐 — 你好"
+    },
+    {
+      "id": "rsa_2048-bad-ciphertext",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Last ciphertext byte before the tag flipped",
+      "envelope_base64": "U1MBAb8TJQ0Vj+ghXZtxAaam3aoFn85Jer4XVWmY60yqUsBu8TARqZ3Zx9P6YvTY3xc2evk7kNMiLc4JdaWyClaRXRV1OMJG0K5J/abEB3fyCxdF63a6jWNrXez5wMjzeeHaRYt8RLlr6/U0wxtICAYkSbb9b/MtpcXhyWzGzZrs+mNmWY5u52ucimG++FzUZ3rb1HgCVrYIcItgfZPWbz94SEH0ArNWuLN5eJHrRod1OUCNi2+2rGWhF7s8z8tkz/ZJfysi9DkHm1hptFOk0LDdnoZCGj4EuWoN914c/BH4GMeOwsQI35Hlm4FqPublIXOwgcEdAL9KzohxxgWZxA+GGt085+y9wpl8KwVES75u374HyxWgvC7On/TCaRe3BUfJVgw2BOY6",
+      "envelope_length": 297,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "rsa_2048-bad-tag",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Last tag byte flipped",
+      "envelope_base64": "U1MBAb8TJQ0Vj+ghXZtxAaam3aoFn85Jer4XVWmY60yqUsBu8TARqZ3Zx9P6YvTY3xc2evk7kNMiLc4JdaWyClaRXRV1OMJG0K5J/abEB3fyCxdF63a6jWNrXez5wMjzeeHaRYt8RLlr6/U0wxtICAYkSbb9b/MtpcXhyWzGzZrs+mNmWY5u52ucimG++FzUZ3rb1HgCVrYIcItgfZPWbz94SEH0ArNWuLN5eJHrRod1OUCNi2+2rGWhF7s8z8tkz/ZJfysi9DkHm1hptFOk0LDdnoZCGj4EuWoN914c/BH4GMeOwsQI35Hlm4FqPublIXOwgcEdAL9KzohxxgWZxA+GGt085+y9wpl8KwVES75u374HyxWgvC/On/TCaRe3BUfJVgw2BOa6",
+      "envelope_length": 297,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "rsa_2048-bad-keyid",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Recipient key id changed",
+      "envelope_base64": "U1MBAb4TJQ0Vj+ghXZtxAaam3aoFn85Jer4XVWmY60yqUsBu8TARqZ3Zx9P6YvTY3xc2evk7kNMiLc4JdaWyClaRXRV1OMJG0K5J/abEB3fyCxdF63a6jWNrXez5wMjzeeHaRYt8RLlr6/U0wxtICAYkSbb9b/MtpcXhyWzGzZrs+mNmWY5u52ucimG++FzUZ3rb1HgCVrYIcItgfZPWbz94SEH0ArNWuLN5eJHrRod1OUCNi2+2rGWhF7s8z8tkz/ZJfysi9DkHm1hptFOk0LDdnoZCGj4EuWoN914c/BH4GMeOwsQI35Hlm4FqPublIXOwgcEdAL9KzohxxgWZxA+GGt085+y9wpl8KwVES75u374HyxWgvC/On/TCaRe3BUfJVgw2BOY6",
+      "envelope_length": 297,
+      "expected_result": "WRONG_RECIPIENT"
+    },
+    {
+      "id": "rsa_2048-bad-version",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Version byte set to 2",
+      "envelope_base64": "U1MCAb8TJQ0Vj+ghXZtxAaam3aoFn85Jer4XVWmY60yqUsBu8TARqZ3Zx9P6YvTY3xc2evk7kNMiLc4JdaWyClaRXRV1OMJG0K5J/abEB3fyCxdF63a6jWNrXez5wMjzeeHaRYt8RLlr6/U0wxtICAYkSbb9b/MtpcXhyWzGzZrs+mNmWY5u52ucimG++FzUZ3rb1HgCVrYIcItgfZPWbz94SEH0ArNWuLN5eJHrRod1OUCNi2+2rGWhF7s8z8tkz/ZJfysi9DkHm1hptFOk0LDdnoZCGj4EuWoN914c/BH4GMeOwsQI35Hlm4FqPublIXOwgcEdAL9KzohxxgWZxA+GGt085+y9wpl8KwVES75u374HyxWgvC/On/TCaRe3BUfJVgw2BOY6",
+      "envelope_length": 297,
+      "expected_result": "UNSUPPORTED_VERSION"
+    },
+    {
+      "id": "rsa_2048-bad-profile",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Profile byte set to 0x7F",
+      "envelope_base64": "U1MBf78TJQ0Vj+ghXZtxAaam3aoFn85Jer4XVWmY60yqUsBu8TARqZ3Zx9P6YvTY3xc2evk7kNMiLc4JdaWyClaRXRV1OMJG0K5J/abEB3fyCxdF63a6jWNrXez5wMjzeeHaRYt8RLlr6/U0wxtICAYkSbb9b/MtpcXhyWzGzZrs+mNmWY5u52ucimG++FzUZ3rb1HgCVrYIcItgfZPWbz94SEH0ArNWuLN5eJHrRod1OUCNi2+2rGWhF7s8z8tkz/ZJfysi9DkHm1hptFOk0LDdnoZCGj4EuWoN914c/BH4GMeOwsQI35Hlm4FqPublIXOwgcEdAL9KzohxxgWZxA+GGt085+y9wpl8KwVES75u374HyxWgvC/On/TCaRe3BUfJVgw2BOY6",
+      "envelope_length": 297,
+      "expected_result": "UNKNOWN_PROFILE"
+    },
+    {
+      "id": "rsa_2048-bad-magic",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Magic bytes changed",
+      "envelope_base64": "AFMBAb8TJQ0Vj+ghXZtxAaam3aoFn85Jer4XVWmY60yqUsBu8TARqZ3Zx9P6YvTY3xc2evk7kNMiLc4JdaWyClaRXRV1OMJG0K5J/abEB3fyCxdF63a6jWNrXez5wMjzeeHaRYt8RLlr6/U0wxtICAYkSbb9b/MtpcXhyWzGzZrs+mNmWY5u52ucimG++FzUZ3rb1HgCVrYIcItgfZPWbz94SEH0ArNWuLN5eJHrRod1OUCNi2+2rGWhF7s8z8tkz/ZJfysi9DkHm1hptFOk0LDdnoZCGj4EuWoN914c/BH4GMeOwsQI35Hlm4FqPublIXOwgcEdAL9KzohxxgWZxA+GGt085+y9wpl8KwVES75u374HyxWgvC/On/TCaRe3BUfJVgw2BOY6",
+      "envelope_length": 297,
+      "expected_result": "MALFORMED_ENVELOPE"
+    },
+    {
+      "id": "rsa_2048-truncated-fragment",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Only the first SMS fragment arrived (shorter than header + key block + tag)",
+      "envelope_base64": "U1MBAb8TJQ0Vj+ghXZtxAaam3aoFn85Jer4XVWmY60yqUsBu8TARqZ3Zx9P6YvTY3xc2evk7kNMiLc4JdaWyClaRXRV1OMJG0K5J/abEB3fyCxdF63a6jWNrXez5wMjzeeHaRYt8RLlr6/U0wxtICAYkSbb9b/MtpcXhyWzGzZrs+mNmWY5u52ucimG++FzUZ3rb1HgCVrYIcItgfZPWbz94SEH0ArNWuLN5eJHrRod1OUCNi2+2rGWhF7s8z8tkz/ZJfysi9DkHm1hptFOk0LDdnoZCGj4EuWoN914c/BH4GMeOwsQI35Hlm4FqPublIXOwgcEdAL9KzohxxgWZxA+GGt085+y9wpl8KwVES75u374HyxWg",
+      "envelope_length": 279,
+      "expected_result": "TRUNCATED_ENVELOPE"
+    },
+    {
+      "id": "rsa_2048-truncated-1",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Last byte missing",
+      "envelope_base64": "U1MBAb8TJQ0Vj+ghXZtxAaam3aoFn85Jer4XVWmY60yqUsBu8TARqZ3Zx9P6YvTY3xc2evk7kNMiLc4JdaWyClaRXRV1OMJG0K5J/abEB3fyCxdF63a6jWNrXez5wMjzeeHaRYt8RLlr6/U0wxtICAYkSbb9b/MtpcXhyWzGzZrs+mNmWY5u52ucimG++FzUZ3rb1HgCVrYIcItgfZPWbz94SEH0ArNWuLN5eJHrRod1OUCNi2+2rGWhF7s8z8tkz/ZJfysi9DkHm1hptFOk0LDdnoZCGj4EuWoN914c/BH4GMeOwsQI35Hlm4FqPublIXOwgcEdAL9KzohxxgWZxA+GGt085+y9wpl8KwVES75u374HyxWgvC/On/TCaRe3BUfJVgw2BOY=",
+      "envelope_length": 296,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "rsa_2048-wrong-recipient",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "Encrypted for a different key of the same profile",
+      "envelope_base64": "U1MBAZpCgHSKCg787FdTpBeFeN/Nnn6U7NFwptwqxFT1Qj6UmSBNkUk/hF3RwqFvNsR9ohh0Rg/mneKp267IOS6uQ1x6Ws6vQHLnbJwVhrPm+hURPM1W6CjLVujT3tCEHEKgNqIQNaFCitRY8c/8ecUDkx1sJ9BYUR7XtK8G27FMxk+epR4F0BgafGx7KFZWUce9GUUo1e4ydKqKyaaoawMFLIkIoZTx46k2Zx4x4WjEp7/7rDckrVYCGd714+1dacR4I8zj8YiaDY52M8vWden/S+ccZh8kPJrRjmIIkmKlPI+vwtVwQd+9lKXiHK4kF34pg1Lv1flksM9TRW5D0fYm6oimf7LFkUjcjU5RN82hUwfFS6jnbbcTr4wQRAA8QbDjrYg=",
+      "envelope_length": 293,
+      "expected_result": "WRONG_RECIPIENT"
+    },
+    {
+      "id": "rsa_2048-bad-wrapped-key",
+      "profile": "RSA_2048",
+      "key_name": "test-RSA_2048",
+      "description": "RSA-OAEP block modified",
+      "envelope_base64": "U1MBAb8TJQ0Vj+ghXZtxAaam3KoFn85Jer4XVWmY60yqUsBu8TARqZ3Zx9P6YvTY3xc2evk7kNMiLc4JdaWyClaRXRV1OMJG0K5J/abEB3fyCxdF63a6jWNrXez5wMjzeeHaRYt8RLlr6/U0wxtICAYkSbb9b/MtpcXhyWzGzZrs+mNmWY5u52ucimG++FzUZ3rb1HgCVrYIcItgfZPWbz94SEH0ArNWuLN5eJHrRod1OUCNi2+2rGWhF7s8z8tkz/ZJfysi9DkHm1hptFOk0LDdnoZCGj4EuWoN914c/BH4GMeOwsQI35Hlm4FqPublIXOwgcEdAL9KzohxxgWZxA+GGt085+y9wpl8KwVES75u374HyxWgvC/On/TCaRe3BUfJVgw2BOY6",
+      "envelope_length": 297,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "rsa_3072-ok-empty",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Valid RSA-3072 envelope, 0-char 'empty' message",
+      "envelope_base64": "U1MBAoo5SJe36VhG9JT8Gz/TIQGsc5yBWvBni/JWJ5EBVBTMCqMnocAacOISHMeSyKEulbGYa8QtWx27je4xFzd+woS4Cs6pNLVvh6gMpprZXBSKjiCk/CQCNgL1Hgxpxg8XydzkH8xe/3dNgu9RIPCgxXvVfiNl1vHKb80lk5AADjtHnRWLXmudleOnS6Pd3BLZVYQXniGoukP5/K5dz3UCcoX4crEcTWRZIDNFIi3N+AOQOQVpU8IA7iftHN7TvKCQwL9tpMVnMz9keqOOFdFjj1qgbRQqeIpo89pF1ir+a4pca9Rtt7OMWQvg1fGtoLh8ugs6Drimoj3NY9ofJxrLxc1R5XzpjgRhJrzSkHGtJKtOuPJYye0jdc2GAlHiEYICoA69JxbF+4FWz2VoEfJ4qOgosBTkkCKirvBc8u63FcR6LHZQp6WhK2w5OVGlR0KKx6rGhIW+fs0SnmgRvlzyTpHaxACIFivvm9MnpCsvxqdw/uUWBJWfn4+KmstWL0cuU516VlbvWmHRYNL3YgEuKttssngF",
+      "envelope_length": 408,
+      "expected_result": "OK",
+      "expected_plaintext": ""
+    },
+    {
+      "id": "rsa_3072-ok-short",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Valid RSA-3072 envelope, 10-char 'short' message",
+      "envelope_base64": "U1MBAoo5SJeR+l+1XM/m7SZBQsnAEvpsj59qrOnyZjGflcrKXLGbo/JM9yxibny2NhnTRnnJajS7OKU/rx7nkNUiXo7btp+HeilZDfjLGSSbedoiYoCQPphxlwwXyHqiZ+eNmqvfcsPOYbZS2TdNFpQNBmOnmpyVGNnGFMSXHXOoGt+2TlNPK4Qn9vwksFxQj9MLurr6KoOZUTiICLLSInOTrHahjIv01KotnucHPAv8gmiwgxmS+k6ERnut1wxAcDDMHfOyG6mbhCLFvJ6oKEmzR+15b8H87+l3DyNIbdtYjvnvk3O2unmIfdtU4FprqUSfUIQseWl6A+Lo8Qgnp6dNOLgDr+dR4o5+E1fnsxoRkC0eFOF/aMLpiCjBw7/sMRHNa3wSlHhqmSV7NDR/iptfXOeJ1ckZY0C3L8AewrmYxDh0kmBZlO8klrPWhnD4h/cmiTH24oLMDZpLWNxQfrXozFioiGtMcC5tkqCXKJyLJNGPBY1+TO1i03hFuiN94MzFHKX+A8WRpQEZmnexZJHpDcpmp3kSwK8bvbRYqkGdNA==",
+      "envelope_length": 418,
+      "expected_result": "OK",
+      "expected_plaintext": "Hola Bruno"
+    },
+    {
+      "id": "rsa_3072-ok-sms160",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Valid RSA-3072 envelope, 160-char 'sms160' message",
+      "envelope_base64": "U1MBAoo5SJdd++6G1knldR4TJjjP1WoWHSMh3rAanq2ykzClYNKIEqMYY8Jz+S0oOX8uT/TljT0MZlHTcxEJRZHy1I4Yyuf8IBkeux42viUQ5UvAJFMurByCBGrFZbhuvl6sF6Fx0CuprYuCg087I+v42aqA8tS1dI5Q0Yo1tEiOzFD3EbUIfIwYY82eM+Q2f5CZA6oyf/JZJVqno2xR8S7p6+ibr1NXIGBhku+nXZM6sLIUfUg67y++AD8jZ9HJ2TF2GRI/HyFx3SQ+D7PYeRGefVhq+WxyZ42qStjh8RnWy10CadQ5N1fRv9Bcq73VM5BWvBjF6coT2BoupsYaj1wVF11ySPyLQHqZbVYSnlSQe4aUseSXMu9rXJcBi8Lg/M3RAvO58f4Vaa1R2FPOMyL+SyxQ4vCOfOzi62CIvN7hFo04lUPEJXNC5i6CoT+5YqJs8mZi2AOFJYkL+QKu1yhqdJsmasSMDursX5pxJ87orNkbZC3x0kTTgW8ctHq4s/u9x+uFV+yMengLz2+gsJgT4U7Z2AsN28xYQ7b02Nn76fsUg0DV8cRiIZmBGtpqa63ShDKaGWITA1Cj3uo8aOZHw8yjr4PLekCaLZNHq+m1pZF3Q56ZFriQ0XNMqlU0mEH0AF6GUR5wi8IDx4UO6MT3GaVc3hp1dl+AZ3V1BzaWvPG0+gaTqJ2PuHAte9PkaR28XJ1gja/66E/UJ1iJ7jZQJgLc6fuSLEYW9GDEwBce2xFGxOHRNA==",
+      "envelope_length": 568,
+      "expected_result": "OK",
+      "expected_plaintext": "Este mensaje tiene exactamente ciento sesenta caracteres para medir el tamano de un SMS normal sin acentos ni simbolos raros!!. Relleno relleno relleno relleno."
+    },
+    {
+      "id": "rsa_3072-ok-unicode",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Valid RSA-3072 envelope, 30-char 'unicode' message",
+      "envelope_base64": "U1MBAoo5SJc8BQ3lolIB7TEUOhNJDHHHTbndnaCihRH6W3AIfTMyR6RKGmje6uTvwN8wRhWMHBP8Opt8hH7Z2RZxLeKdJGdRl774H94WzgOl3DoofhxVCTQFl1WS4Cx9kcJa1aU778FdSxRtMB8OhV1Sly7uSzYUGmlnODK/fGygheaePxdrJ2Ne0YYXm51dQTbS/aCuMvdGXIIPM7Fh0DR8rMNh0HKNMxLW9tt2LcI2kt2abbeVjjFOyXWk4Sj+ALfhQDq3TtNPeh89QGTt2R0JtWuss5fkXZMOUp2DT2MJf1okREbn9Ts39ezY1yiZVkEilh8i9d57DmsTFgfACpSVB1nfLJKw6lWFf83ssYWktLl2vRiRcIe46g91wNkBJ8lEAyIg24ljCG+8GUeOUlIxL0ovrfiIGcP98plld2LuqYyutQ6XwmoLDZoylBKZSEyOgPno+NQhZE1kygEmeQwDcy2c6ssKCbEy45GvIwOY0DD8fn16y++KuR1YSvg6gRtu0I28l0BmDK1h12LcUL9Sma5Qib9cyIuw3VseKXqDrV1yskpzDliHEHpQEkfZI6sxrbyqYSYI8eZt2oOM/QVpFdA=",
+      "envelope_length": 452,
+      "expected_result": "OK",
+      "expected_plaintext": "¡Hola! Ñandú, café y 😀🔐 — 你好"
+    },
+    {
+      "id": "rsa_3072-bad-ciphertext",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Last ciphertext byte before the tag flipped",
+      "envelope_base64": "U1MBAoo5SJezGy2CdNt9nJiMDo+BJ5twR61lbBEVblQg6mgdm8jMPtc1rFK+uK+Fd3la5H1a5HZquDZXCsQuEM1LI0mHMP+C1QssAQ6NKmmcq6sgNm2KXitXM4GbYL06hXICdcgJRtqewQP0nydduD8vo3OpGia/SBk79Q3+lp1PTkiKoNWpXmPAucdu9eWoLGCojs0YkZhr1stE1h+htInBFTVtZ/RULjWR8Xj9I8YgQ8b43H/LRlIjC7H2DDFwhDIAGse/xbX1KhFv+xvR9q70ntPQsnCrumMLYfovSKTrhuSOZTmctaRo65dGW+Kq9XCoAng2GMGjrh05VylLljJH2nCugI0fKPEtvFlwwBDW8L5XDDBIt55hg6hCKwytcWpKQGYxCv36WWdReeiNqN8Hdja3PtU2hVlky3sIPlh528aY5QU+gRXrVjgEI8ZIsGm2+VNs45jRq0ogNav4rgblvy/aRT+QnZldFlBTwvw7MwUiXcHac1b71qj4UHWEr4BFA+Lgxo9rskkgZUvt0aR14hAiaEQHWOnsZdp1JMZW1TYYy0zoEds=",
+      "envelope_length": 425,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "rsa_3072-bad-tag",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Last tag byte flipped",
+      "envelope_base64": "U1MBAoo5SJezGy2CdNt9nJiMDo+BJ5twR61lbBEVblQg6mgdm8jMPtc1rFK+uK+Fd3la5H1a5HZquDZXCsQuEM1LI0mHMP+C1QssAQ6NKmmcq6sgNm2KXitXM4GbYL06hXICdcgJRtqewQP0nydduD8vo3OpGia/SBk79Q3+lp1PTkiKoNWpXmPAucdu9eWoLGCojs0YkZhr1stE1h+htInBFTVtZ/RULjWR8Xj9I8YgQ8b43H/LRlIjC7H2DDFwhDIAGse/xbX1KhFv+xvR9q70ntPQsnCrumMLYfovSKTrhuSOZTmctaRo65dGW+Kq9XCoAng2GMGjrh05VylLljJH2nCugI0fKPEtvFlwwBDW8L5XDDBIt55hg6hCKwytcWpKQGYxCv36WWdReeiNqN8Hdja3PtU2hVlky3sIPlh528aY5QU+gRXrVjgEI8ZIsGm2+VNs45jRq0ogNav4rgblvy/aRT+QnZldFlBTwvw7MwUiXcHac1b71qj4UHWEr4BFA+Lgxo9rskkgZUvt0aR14hAiaEQHWensZdp1JMZW1TYYy0zoEVs=",
+      "envelope_length": 425,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "rsa_3072-bad-keyid",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Recipient key id changed",
+      "envelope_base64": "U1MBAos5SJezGy2CdNt9nJiMDo+BJ5twR61lbBEVblQg6mgdm8jMPtc1rFK+uK+Fd3la5H1a5HZquDZXCsQuEM1LI0mHMP+C1QssAQ6NKmmcq6sgNm2KXitXM4GbYL06hXICdcgJRtqewQP0nydduD8vo3OpGia/SBk79Q3+lp1PTkiKoNWpXmPAucdu9eWoLGCojs0YkZhr1stE1h+htInBFTVtZ/RULjWR8Xj9I8YgQ8b43H/LRlIjC7H2DDFwhDIAGse/xbX1KhFv+xvR9q70ntPQsnCrumMLYfovSKTrhuSOZTmctaRo65dGW+Kq9XCoAng2GMGjrh05VylLljJH2nCugI0fKPEtvFlwwBDW8L5XDDBIt55hg6hCKwytcWpKQGYxCv36WWdReeiNqN8Hdja3PtU2hVlky3sIPlh528aY5QU+gRXrVjgEI8ZIsGm2+VNs45jRq0ogNav4rgblvy/aRT+QnZldFlBTwvw7MwUiXcHac1b71qj4UHWEr4BFA+Lgxo9rskkgZUvt0aR14hAiaEQHWensZdp1JMZW1TYYy0zoEds=",
+      "envelope_length": 425,
+      "expected_result": "WRONG_RECIPIENT"
+    },
+    {
+      "id": "rsa_3072-bad-version",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Version byte set to 2",
+      "envelope_base64": "U1MCAoo5SJezGy2CdNt9nJiMDo+BJ5twR61lbBEVblQg6mgdm8jMPtc1rFK+uK+Fd3la5H1a5HZquDZXCsQuEM1LI0mHMP+C1QssAQ6NKmmcq6sgNm2KXitXM4GbYL06hXICdcgJRtqewQP0nydduD8vo3OpGia/SBk79Q3+lp1PTkiKoNWpXmPAucdu9eWoLGCojs0YkZhr1stE1h+htInBFTVtZ/RULjWR8Xj9I8YgQ8b43H/LRlIjC7H2DDFwhDIAGse/xbX1KhFv+xvR9q70ntPQsnCrumMLYfovSKTrhuSOZTmctaRo65dGW+Kq9XCoAng2GMGjrh05VylLljJH2nCugI0fKPEtvFlwwBDW8L5XDDBIt55hg6hCKwytcWpKQGYxCv36WWdReeiNqN8Hdja3PtU2hVlky3sIPlh528aY5QU+gRXrVjgEI8ZIsGm2+VNs45jRq0ogNav4rgblvy/aRT+QnZldFlBTwvw7MwUiXcHac1b71qj4UHWEr4BFA+Lgxo9rskkgZUvt0aR14hAiaEQHWensZdp1JMZW1TYYy0zoEds=",
+      "envelope_length": 425,
+      "expected_result": "UNSUPPORTED_VERSION"
+    },
+    {
+      "id": "rsa_3072-bad-profile",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Profile byte set to 0x7F",
+      "envelope_base64": "U1MBf4o5SJezGy2CdNt9nJiMDo+BJ5twR61lbBEVblQg6mgdm8jMPtc1rFK+uK+Fd3la5H1a5HZquDZXCsQuEM1LI0mHMP+C1QssAQ6NKmmcq6sgNm2KXitXM4GbYL06hXICdcgJRtqewQP0nydduD8vo3OpGia/SBk79Q3+lp1PTkiKoNWpXmPAucdu9eWoLGCojs0YkZhr1stE1h+htInBFTVtZ/RULjWR8Xj9I8YgQ8b43H/LRlIjC7H2DDFwhDIAGse/xbX1KhFv+xvR9q70ntPQsnCrumMLYfovSKTrhuSOZTmctaRo65dGW+Kq9XCoAng2GMGjrh05VylLljJH2nCugI0fKPEtvFlwwBDW8L5XDDBIt55hg6hCKwytcWpKQGYxCv36WWdReeiNqN8Hdja3PtU2hVlky3sIPlh528aY5QU+gRXrVjgEI8ZIsGm2+VNs45jRq0ogNav4rgblvy/aRT+QnZldFlBTwvw7MwUiXcHac1b71qj4UHWEr4BFA+Lgxo9rskkgZUvt0aR14hAiaEQHWensZdp1JMZW1TYYy0zoEds=",
+      "envelope_length": 425,
+      "expected_result": "UNKNOWN_PROFILE"
+    },
+    {
+      "id": "rsa_3072-bad-magic",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Magic bytes changed",
+      "envelope_base64": "AFMBAoo5SJezGy2CdNt9nJiMDo+BJ5twR61lbBEVblQg6mgdm8jMPtc1rFK+uK+Fd3la5H1a5HZquDZXCsQuEM1LI0mHMP+C1QssAQ6NKmmcq6sgNm2KXitXM4GbYL06hXICdcgJRtqewQP0nydduD8vo3OpGia/SBk79Q3+lp1PTkiKoNWpXmPAucdu9eWoLGCojs0YkZhr1stE1h+htInBFTVtZ/RULjWR8Xj9I8YgQ8b43H/LRlIjC7H2DDFwhDIAGse/xbX1KhFv+xvR9q70ntPQsnCrumMLYfovSKTrhuSOZTmctaRo65dGW+Kq9XCoAng2GMGjrh05VylLljJH2nCugI0fKPEtvFlwwBDW8L5XDDBIt55hg6hCKwytcWpKQGYxCv36WWdReeiNqN8Hdja3PtU2hVlky3sIPlh528aY5QU+gRXrVjgEI8ZIsGm2+VNs45jRq0ogNav4rgblvy/aRT+QnZldFlBTwvw7MwUiXcHac1b71qj4UHWEr4BFA+Lgxo9rskkgZUvt0aR14hAiaEQHWensZdp1JMZW1TYYy0zoEds=",
+      "envelope_length": 425,
+      "expected_result": "MALFORMED_ENVELOPE"
+    },
+    {
+      "id": "rsa_3072-truncated-fragment",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Only the first SMS fragment arrived (shorter than header + key block + tag)",
+      "envelope_base64": "U1MBAoo5SJezGy2CdNt9nJiMDo+BJ5twR61lbBEVblQg6mgdm8jMPtc1rFK+uK+Fd3la5H1a5HZquDZXCsQuEM1LI0mHMP+C1QssAQ6NKmmcq6sgNm2KXitXM4GbYL06hXICdcgJRtqewQP0nydduD8vo3OpGia/SBk79Q3+lp1PTkiKoNWpXmPAucdu9eWoLGCojs0YkZhr1stE1h+htInBFTVtZ/RULjWR8Xj9I8YgQ8b43H/LRlIjC7H2DDFwhDIAGse/xbX1KhFv+xvR9q70ntPQsnCrumMLYfovSKTrhuSOZTmctaRo65dGW+Kq9XCoAng2GMGjrh05VylLljJH2nCugI0fKPEtvFlwwBDW8L5XDDBIt55hg6hCKwytcWpKQGYxCv36WWdReeiNqN8Hdja3PtU2hVlky3sIPlh528aY5QU+gRXrVjgEI8ZIsGm2+VNs45jRq0ogNav4rgblvy/aRT+QnZldFlBTwvw7MwUiXcHac1b71qj4UHWEr4BFA+Lgxo9rskkgZUvt0aR14hAiaEQ=",
+      "envelope_length": 407,
+      "expected_result": "TRUNCATED_ENVELOPE"
+    },
+    {
+      "id": "rsa_3072-truncated-1",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Last byte missing",
+      "envelope_base64": "U1MBAoo5SJezGy2CdNt9nJiMDo+BJ5twR61lbBEVblQg6mgdm8jMPtc1rFK+uK+Fd3la5H1a5HZquDZXCsQuEM1LI0mHMP+C1QssAQ6NKmmcq6sgNm2KXitXM4GbYL06hXICdcgJRtqewQP0nydduD8vo3OpGia/SBk79Q3+lp1PTkiKoNWpXmPAucdu9eWoLGCojs0YkZhr1stE1h+htInBFTVtZ/RULjWR8Xj9I8YgQ8b43H/LRlIjC7H2DDFwhDIAGse/xbX1KhFv+xvR9q70ntPQsnCrumMLYfovSKTrhuSOZTmctaRo65dGW+Kq9XCoAng2GMGjrh05VylLljJH2nCugI0fKPEtvFlwwBDW8L5XDDBIt55hg6hCKwytcWpKQGYxCv36WWdReeiNqN8Hdja3PtU2hVlky3sIPlh528aY5QU+gRXrVjgEI8ZIsGm2+VNs45jRq0ogNav4rgblvy/aRT+QnZldFlBTwvw7MwUiXcHac1b71qj4UHWEr4BFA+Lgxo9rskkgZUvt0aR14hAiaEQHWensZdp1JMZW1TYYy0zoEQ==",
+      "envelope_length": 424,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "rsa_3072-wrong-recipient",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "Encrypted for a different key of the same profile",
+      "envelope_base64": "U1MBAtGsEDCOixoPoA47MdxA9s6D9eN6UC1rlYwmpI13UwNDCcfMIECKANoCGkVTE/mPuw+NYq9jlImFw2GUC2E9aA82PB0swgYWuK37sd67/+QxLnRk4cpFA4ABIfQPoRS6XL1RV9yJ+ulFFbuaciywRLMuDhytD5pqh7xwT4hqVSupnD0MxAkYiz1vgdwanrdiVWlPAN+lyDJ6pXvw+SDjECPjnY6qaOtMnLu44M5qpqiikKQVc9kWiLPElrJwyFkp+S5UwgZfdOV1PEZ5B7MZ9yjOKeV5GCDx4QAAhNoJl68GcdnZGVK57O3czFSVHaRemDCOuwCFzucTcKOMvllwWBl2NI3Xp7yLR6p9LJAFtTJYFgD7SKCq1aCErsmB+tqmJKw456omxnEbiuCCcGfCyu2GyVD2RvQQnyZGT2xiMgGunaN258ASKA8eEZchO5KieWsLBW6mxoxLSFLewO0B4mxgVEeQeJAg3KSTwvFSm6ARk5qqy9nVzboJxvGII1jbl07Nk+12D19Hu/4fbRLNx3xU+T8Pxw7L/a6pR1W3oyzomQ==",
+      "envelope_length": 421,
+      "expected_result": "WRONG_RECIPIENT"
+    },
+    {
+      "id": "rsa_3072-bad-wrapped-key",
+      "profile": "RSA_3072",
+      "key_name": "test-RSA_3072",
+      "description": "RSA-OAEP block modified",
+      "envelope_base64": "U1MBAoo5SJezGy2CdNt9nJiMD4+BJ5twR61lbBEVblQg6mgdm8jMPtc1rFK+uK+Fd3la5H1a5HZquDZXCsQuEM1LI0mHMP+C1QssAQ6NKmmcq6sgNm2KXitXM4GbYL06hXICdcgJRtqewQP0nydduD8vo3OpGia/SBk79Q3+lp1PTkiKoNWpXmPAucdu9eWoLGCojs0YkZhr1stE1h+htInBFTVtZ/RULjWR8Xj9I8YgQ8b43H/LRlIjC7H2DDFwhDIAGse/xbX1KhFv+xvR9q70ntPQsnCrumMLYfovSKTrhuSOZTmctaRo65dGW+Kq9XCoAng2GMGjrh05VylLljJH2nCugI0fKPEtvFlwwBDW8L5XDDBIt55hg6hCKwytcWpKQGYxCv36WWdReeiNqN8Hdja3PtU2hVlky3sIPlh528aY5QU+gRXrVjgEI8ZIsGm2+VNs45jRq0ogNav4rgblvy/aRT+QnZldFlBTwvw7MwUiXcHac1b71qj4UHWEr4BFA+Lgxo9rskkgZUvt0aR14hAiaEQHWensZdp1JMZW1TYYy0zoEds=",
+      "envelope_length": 425,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "ecc_p256-ok-empty",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Valid ECC-P256 envelope, 0-char 'empty' message",
+      "envelope_base64": "U1MBEdzr+toDd507JTqzr9pdAw4H+4h/zHfVQUlp5Rp4sscm0OvNAWgHRpX8ihsxcfQ6ge6SVuoz",
+      "envelope_length": 57,
+      "expected_result": "OK",
+      "expected_plaintext": ""
+    },
+    {
+      "id": "ecc_p256-ok-short",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Valid ECC-P256 envelope, 10-char 'short' message",
+      "envelope_base64": "U1MBEdzr+toCfxT/75b4D0yzIVHVgpsbbGInozjsCbjPxRdHkZ+jZ14mBaqaPjvKCFEjEhNtHYUK/YrhJD1kQg+5XQ==",
+      "envelope_length": 67,
+      "expected_result": "OK",
+      "expected_plaintext": "Hola Bruno"
+    },
+    {
+      "id": "ecc_p256-ok-sms160",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Valid ECC-P256 envelope, 160-char 'sms160' message",
+      "envelope_base64": "U1MBEdzr+toDUDooDqp/brLi8Lka7K5cKb0tH9MTNX0I3vbok7cm1GoUgWzzuuwSHr49ZxXPpXyjw1lucRMjo/ZWVIYQ84snDojYfQ2jVzJC28+iDp9J2NNeH6hjBUWw2zJDu7lAcw1qoyC8JATa1X5meeOZxQtUVTL3rN8yXTVpI5RKv1g8fNwHSsOntljceqlBNa7X6lXYTjoJY4y3RhAjRB+eJCl+8BnI9eoAwRDjhhvHCe0NxvehhpY/v5EdAZZI4lACwGrkUVi8CCa2JYuvHnJdiEkmQQ==",
+      "envelope_length": 217,
+      "expected_result": "OK",
+      "expected_plaintext": "Este mensaje tiene exactamente ciento sesenta caracteres para medir el tamano de un SMS normal sin acentos ni simbolos raros!!. Relleno relleno relleno relleno."
+    },
+    {
+      "id": "ecc_p256-ok-unicode",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Valid ECC-P256 envelope, 30-char 'unicode' message",
+      "envelope_base64": "U1MBEdzr+toCGvrqW2mS6YS7m0p9z6BuWqoUACYzEQ+pMs+HKnsY48t1OCTOghgN3Nkm+3oZuQ1JPpdbzOszxm2Pph1V4m8tcD8v7dKGWH4yY5Gg1YfngqxZBPLnDdXUqluC3Ho=",
+      "envelope_length": 101,
+      "expected_result": "OK",
+      "expected_plaintext": "¡Hola! Ñandú, café y 😀🔐 — 你好"
+    },
+    {
+      "id": "ecc_p256-bad-ciphertext",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Last ciphertext byte before the tag flipped",
+      "envelope_base64": "U1MBEdzr+toD5Cndtvqcd9HEyhnvi6cAjp53lvAL3wWqnDLgrotmhAj1PJ4WqJEsPM5b7UHcS1g0k2JxvD75LprtX6jBSSY61/M=",
+      "envelope_length": 74,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "ecc_p256-bad-tag",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Last tag byte flipped",
+      "envelope_base64": "U1MBEdzr+toD5Cndtvqcd9HEyhnvi6cAjp53lvAL3wWqnDLgrotmhAj1PJ4WqJEsPM5b7UHcS1g0kmJxvD75LprtX6jBSSY613M=",
+      "envelope_length": 74,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "ecc_p256-bad-keyid",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Recipient key id changed",
+      "envelope_base64": "U1MBEd3r+toD5Cndtvqcd9HEyhnvi6cAjp53lvAL3wWqnDLgrotmhAj1PJ4WqJEsPM5b7UHcS1g0kmJxvD75LprtX6jBSSY61/M=",
+      "envelope_length": 74,
+      "expected_result": "WRONG_RECIPIENT"
+    },
+    {
+      "id": "ecc_p256-bad-version",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Version byte set to 2",
+      "envelope_base64": "U1MCEdzr+toD5Cndtvqcd9HEyhnvi6cAjp53lvAL3wWqnDLgrotmhAj1PJ4WqJEsPM5b7UHcS1g0kmJxvD75LprtX6jBSSY61/M=",
+      "envelope_length": 74,
+      "expected_result": "UNSUPPORTED_VERSION"
+    },
+    {
+      "id": "ecc_p256-bad-profile",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Profile byte set to 0x7F",
+      "envelope_base64": "U1MBf9zr+toD5Cndtvqcd9HEyhnvi6cAjp53lvAL3wWqnDLgrotmhAj1PJ4WqJEsPM5b7UHcS1g0kmJxvD75LprtX6jBSSY61/M=",
+      "envelope_length": 74,
+      "expected_result": "UNKNOWN_PROFILE"
+    },
+    {
+      "id": "ecc_p256-bad-magic",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Magic bytes changed",
+      "envelope_base64": "AFMBEdzr+toD5Cndtvqcd9HEyhnvi6cAjp53lvAL3wWqnDLgrotmhAj1PJ4WqJEsPM5b7UHcS1g0kmJxvD75LprtX6jBSSY61/M=",
+      "envelope_length": 74,
+      "expected_result": "MALFORMED_ENVELOPE"
+    },
+    {
+      "id": "ecc_p256-truncated-fragment",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Only the first SMS fragment arrived (shorter than header + key block + tag)",
+      "envelope_base64": "U1MBEdzr+toD5Cndtvqcd9HEyhnvi6cAjp53lvAL3wWqnDLgrotmhAj1PJ4WqJEsPM5b7UHcS1g=",
+      "envelope_length": 56,
+      "expected_result": "TRUNCATED_ENVELOPE"
+    },
+    {
+      "id": "ecc_p256-truncated-1",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Last byte missing",
+      "envelope_base64": "U1MBEdzr+toD5Cndtvqcd9HEyhnvi6cAjp53lvAL3wWqnDLgrotmhAj1PJ4WqJEsPM5b7UHcS1g0kmJxvD75LprtX6jBSSY61w==",
+      "envelope_length": 73,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "ecc_p256-wrong-recipient",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Encrypted for a different key of the same profile",
+      "envelope_base64": "U1MBEabr8LAD75ckRQCtJXhSG3ITi5kWFuLyg8Fnm/Gh86soi3bAb1tzbLGDZPVKshETy94N4bIcoqsg0UQe4YugU0h8+g==",
+      "envelope_length": 70,
+      "expected_result": "WRONG_RECIPIENT"
+    },
+    {
+      "id": "ecc_p256-bad-ephemeral",
+      "profile": "ECC_P256",
+      "key_name": "test-ECC_P256",
+      "description": "Ephemeral point prefix changed to 0x04",
+      "envelope_base64": "U1MBEdzr+toE5Cndtvqcd9HEyhnvi6cAjp53lvAL3wWqnDLgrotmhAj1PJ4WqJEsPM5b7UHcS1g0kmJxvD75LprtX6jBSSY61/M=",
+      "envelope_length": 74,
+      "expected_result": "INVALID_EPHEMERAL_KEY"
+    },
+    {
+      "id": "ecc_p384-ok-empty",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Valid ECC-P384 envelope, 0-char 'empty' message",
+      "envelope_base64": "U1MBEhjuPLcDuaOhvkZ2WZAb6qF6gPrBZp1MflbKBl8ajaFSEcBi1Ql2Q8PXx+o+XQdNnPvve3UAUjgED7cYkbDfww25kNZ7zQ==",
+      "envelope_length": 73,
+      "expected_result": "OK",
+      "expected_plaintext": ""
+    },
+    {
+      "id": "ecc_p384-ok-short",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Valid ECC-P384 envelope, 10-char 'short' message",
+      "envelope_base64": "U1MBEhjuPLcD9JYw3e/DZC0jMLlRVx11COmEPIj6bGlcGgvActDnPKuArD+zrCa4uV6n10O/LMqeFEhSNDNvdtf394wUIiqfENsA2+Fwnnaqp5M=",
+      "envelope_length": 83,
+      "expected_result": "OK",
+      "expected_plaintext": "Hola Bruno"
+    },
+    {
+      "id": "ecc_p384-ok-sms160",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Valid ECC-P384 envelope, 160-char 'sms160' message",
+      "envelope_base64": "U1MBEhjuPLcDU/1tSsE/pNkggnkwquHvLpPsuowqLwnDETEMBIOP6hejpBAcMSVe5WZzuO3gkYF0ybPRdpWF2/H3gZWIRqEJDTwYLnT0yNuF5t4SG5d0YxOMkphNoTRxMa/QpVJgjJFPlxHNZOl2QybOanB6AxLMr+jWUFKtnJounrre+eiFkkDZmB/3k3d2HSV11JlV0Kt7uck8foCgb+Y0qeHi8AoNDsHcxnlEf1oWkDHCYCL5u56iexQNGHZ7MHEezkPsMhVoGPet/XYTMv0Qw0l3DobcZyVpNXJzLmLAXMVMpC/5kjw=",
+      "envelope_length": 233,
+      "expected_result": "OK",
+      "expected_plaintext": "Este mensaje tiene exactamente ciento sesenta caracteres para medir el tamano de un SMS normal sin acentos ni simbolos raros!!. Relleno relleno relleno relleno."
+    },
+    {
+      "id": "ecc_p384-ok-unicode",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Valid ECC-P384 envelope, 30-char 'unicode' message",
+      "envelope_base64": "U1MBEhjuPLcCuV8+DzoJCBP9dlX5DLcuHiD9JfJlfqV/rGHzAXcUDnrJfyWQEULtO9HggAHuuSgYCTycORdeCPsap5FAQMiZORTvf7GDac73nid73LeqjlEaq7DG3Ee9cNwH9XYru8wpZY1VX2ImgL4e+yAd",
+      "envelope_length": 117,
+      "expected_result": "OK",
+      "expected_plaintext": "¡Hola! Ñandú, café y 😀🔐 — 你好"
+    },
+    {
+      "id": "ecc_p384-bad-ciphertext",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Last ciphertext byte before the tag flipped",
+      "envelope_base64": "U1MBEhjuPLcCh/lg4ChWYX5Ziykh4bdJcD5yDiA/t3yg7eQzVOvnBCR6NLEn/GLkxv4FOJtHvIInOJOL0h8gtFM3p8pVPJI6qd+MG+LXUid2B19iUgMTbAnR",
+      "envelope_length": 90,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "ecc_p384-bad-tag",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Last tag byte flipped",
+      "envelope_base64": "U1MBEhjuPLcCh/lg4ChWYX5Ziykh4bdJcD5yDiA/t3yg7eQzVOvnBCR6NLEn/GLkxv4FOJtHvIInOJOL0h8gtFM3p8pVPJI6qd6MG+LXUid2B19iUgMTbAlR",
+      "envelope_length": 90,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "ecc_p384-bad-keyid",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Recipient key id changed",
+      "envelope_base64": "U1MBEhnuPLcCh/lg4ChWYX5Ziykh4bdJcD5yDiA/t3yg7eQzVOvnBCR6NLEn/GLkxv4FOJtHvIInOJOL0h8gtFM3p8pVPJI6qd6MG+LXUid2B19iUgMTbAnR",
+      "envelope_length": 90,
+      "expected_result": "WRONG_RECIPIENT"
+    },
+    {
+      "id": "ecc_p384-bad-version",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Version byte set to 2",
+      "envelope_base64": "U1MCEhjuPLcCh/lg4ChWYX5Ziykh4bdJcD5yDiA/t3yg7eQzVOvnBCR6NLEn/GLkxv4FOJtHvIInOJOL0h8gtFM3p8pVPJI6qd6MG+LXUid2B19iUgMTbAnR",
+      "envelope_length": 90,
+      "expected_result": "UNSUPPORTED_VERSION"
+    },
+    {
+      "id": "ecc_p384-bad-profile",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Profile byte set to 0x7F",
+      "envelope_base64": "U1MBfxjuPLcCh/lg4ChWYX5Ziykh4bdJcD5yDiA/t3yg7eQzVOvnBCR6NLEn/GLkxv4FOJtHvIInOJOL0h8gtFM3p8pVPJI6qd6MG+LXUid2B19iUgMTbAnR",
+      "envelope_length": 90,
+      "expected_result": "UNKNOWN_PROFILE"
+    },
+    {
+      "id": "ecc_p384-bad-magic",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Magic bytes changed",
+      "envelope_base64": "AFMBEhjuPLcCh/lg4ChWYX5Ziykh4bdJcD5yDiA/t3yg7eQzVOvnBCR6NLEn/GLkxv4FOJtHvIInOJOL0h8gtFM3p8pVPJI6qd6MG+LXUid2B19iUgMTbAnR",
+      "envelope_length": 90,
+      "expected_result": "MALFORMED_ENVELOPE"
+    },
+    {
+      "id": "ecc_p384-truncated-fragment",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Only the first SMS fragment arrived (shorter than header + key block + tag)",
+      "envelope_base64": "U1MBEhjuPLcCh/lg4ChWYX5Ziykh4bdJcD5yDiA/t3yg7eQzVOvnBCR6NLEn/GLkxv4FOJtHvIInOJOL0h8gtFM3p8pVPJI6",
+      "envelope_length": 72,
+      "expected_result": "TRUNCATED_ENVELOPE"
+    },
+    {
+      "id": "ecc_p384-truncated-1",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Last byte missing",
+      "envelope_base64": "U1MBEhjuPLcCh/lg4ChWYX5Ziykh4bdJcD5yDiA/t3yg7eQzVOvnBCR6NLEn/GLkxv4FOJtHvIInOJOL0h8gtFM3p8pVPJI6qd6MG+LXUid2B19iUgMTbAk=",
+      "envelope_length": 89,
+      "expected_result": "AUTHENTICATION_FAILED"
+    },
+    {
+      "id": "ecc_p384-wrong-recipient",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Encrypted for a different key of the same profile",
+      "envelope_base64": "U1MBEuor4BsDE1VYVz0iwAu29PqEWCVNlSccCM8waJKzF7J5H+zy75ihW7hfavftpVeparROaGomx2pUv892YxgJq2f5p0BzmeDtKyjWYspXKxRpM18=",
+      "envelope_length": 86,
+      "expected_result": "WRONG_RECIPIENT"
+    },
+    {
+      "id": "ecc_p384-bad-ephemeral",
+      "profile": "ECC_P384",
+      "key_name": "test-ECC_P384",
+      "description": "Ephemeral point prefix changed to 0x04",
+      "envelope_base64": "U1MBEhjuPLcEh/lg4ChWYX5Ziykh4bdJcD5yDiA/t3yg7eQzVOvnBCR6NLEn/GLkxv4FOJtHvIInOJOL0h8gtFM3p8pVPJI6qd6MG+LXUid2B19iUgMTbAnR",
+      "envelope_length": 90,
+      "expected_result": "INVALID_EPHEMERAL_KEY"
+    }
+  ]
+}

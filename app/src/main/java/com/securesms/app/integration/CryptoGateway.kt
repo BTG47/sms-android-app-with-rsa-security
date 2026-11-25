@@ -18,6 +18,17 @@ enum class Perfil {
 }
 
 /**
+ * Texto recuperado de un Envelope junto con el perfil que lo produjo.
+ *
+ * Solo lo devuelve una implementación que puede invertir el cifrado; el perfil permite
+ * mostrar el diagnóstico sin volver a interpretar el contenido.
+ */
+data class MensajeDescifrado(
+    val texto: String,
+    val perfil: Perfil,
+)
+
+/**
  * Fachada de cifrado usada por la interfaz de usuario.
  *
  * Es una frontera nuestra: ningún tipo de la biblioteca criptográfica cruza esta interfaz.
@@ -34,4 +45,12 @@ interface CryptoGateway {
      * El texto plano no se conserva en el resultado ni se expone en caso de fallo.
      */
     fun cifrar(texto: String, perfil: Perfil): Result<ByteArray>
+
+    /**
+     * Recupera el texto y el perfil de un Envelope producido por esta misma implementación.
+     *
+     * Devuelve un fallo, sin exponer el contenido ni la causa técnica, si el Envelope es ajeno,
+     * está truncado o no se puede interpretar como UTF-8.
+     */
+    fun descifrar(envelope: ByteArray): Result<MensajeDescifrado>
 }

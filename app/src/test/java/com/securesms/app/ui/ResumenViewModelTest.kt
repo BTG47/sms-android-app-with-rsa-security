@@ -2,6 +2,7 @@ package com.securesms.app.ui
 
 import com.securesms.app.integration.CryptoGateway
 import com.securesms.app.integration.FakeCryptoGateway
+import com.securesms.app.integration.MensajeDescifrado
 import com.securesms.app.integration.Perfil
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -14,12 +15,18 @@ private class GatewayQueFalla : CryptoGateway {
 
     override fun cifrar(texto: String, perfil: Perfil): Result<ByteArray> =
         Result.failure(IllegalStateException("secreto-del-gateway"))
+
+    override fun descifrar(envelope: ByteArray): Result<MensajeDescifrado> =
+        Result.failure(IllegalStateException("no usado"))
 }
 
 private class GatewaySinBytes : CryptoGateway {
     override val esDemo: Boolean = true
 
     override fun cifrar(texto: String, perfil: Perfil): Result<ByteArray> = Result.success(ByteArray(0))
+
+    override fun descifrar(envelope: ByteArray): Result<MensajeDescifrado> =
+        Result.failure(IllegalStateException("no usado"))
 }
 
 /** Comprueba si [aguja] aparece como secuencia contigua dentro de [bytes]. */
@@ -54,7 +61,7 @@ class ResumenViewModelTest {
         viewModel.cifrar("Hola", Perfil.RSA_2048)
 
         assertEquals(
-            "sin destinatario | RSA_2048 | 36 bytes | SMS: 1 | huella: sin verificar",
+            "sin destinatario | RSA_2048 | 9 bytes | SMS: 1 | huella: sin verificar",
             viewModel.uiState.value.resumen,
         )
     }

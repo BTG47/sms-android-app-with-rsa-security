@@ -53,7 +53,7 @@ fun huellaLegible(huella: String): String =
  * El botón de envío solo se habilita con una clave verificada. El envío real llega en el ticket 07.
  */
 @Composable
-fun PantallaContactos(viewModel: ContactosViewModel) {
+fun PantallaContactos(viewModel: ContactosViewModel, onIniciarConversacion: (String) -> Unit) {
     val estado by viewModel.uiState.collectAsState()
     val alcance = rememberCoroutineScope()
 
@@ -130,6 +130,7 @@ fun PantallaContactos(viewModel: ContactosViewModel) {
                 onVerificar = { viewModel.verificar(fila.numero, confirmada) },
                 onExportar = { viewModel.exportar(fila.numero) },
                 puedeEnviar = viewModel.puedeEnviar(fila.numero),
+                onIniciarConversacion = { onIniciarConversacion(fila.numero) },
             )
         }
     }
@@ -217,6 +218,7 @@ private fun DetalleDeClave(
     onVerificar: () -> Unit,
     onExportar: () -> Unit,
     puedeEnviar: Boolean,
+    onIniciarConversacion: () -> Unit,
 ) {
     Card(Modifier.fillMaxWidth()) {
         val portapapeles = LocalClipboard.current
@@ -292,8 +294,12 @@ private fun DetalleDeClave(
                 )
             }
 
-            Button(onClick = { /* el envio real llega en el ticket 07 */ }, enabled = puedeEnviar) {
-                Text("Enviar")
+            Button(
+                onClick = onIniciarConversacion,
+                enabled = puedeEnviar,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+            ) {
+                Text("Iniciar conversacion")
             }
             if (!puedeEnviar) {
                 Text("El envio se habilita solo con la clave verificada.")
