@@ -1,0 +1,7 @@
+modelo=samsung SM-S926B
+android=17
+api=37
+soc=Samsung s5e9945
+claves=5
+mensajes=30
+calentamiento=3
