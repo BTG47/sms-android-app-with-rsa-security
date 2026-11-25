@@ -4,6 +4,8 @@
 
 package com.securesms.app.integration
 
+import com.securesms.app.identity.ClavePublicaImportada
+
 /**
  * Configuraciones asimétricas que la aplicación puede seleccionar.
  *
@@ -32,7 +34,7 @@ data class MensajeDescifrado(
  * Fachada de cifrado usada por la interfaz de usuario.
  *
  * Es una frontera nuestra: ningún tipo de la biblioteca criptográfica cruza esta interfaz.
- * La implementación real se sustituirá al integrar el módulo `:crypto`.
+ * El diagnóstico conserva su implementación demo y Mensajes usa las claves del contacto.
  */
 interface CryptoGateway {
 
@@ -45,6 +47,10 @@ interface CryptoGateway {
      * El texto plano no se conserva en el resultado ni se expone en caso de fallo.
      */
     fun cifrar(texto: String, perfil: Perfil): Result<ByteArray>
+
+    /** Cifra usando la clave pública del contacto seleccionado. */
+    fun cifrar(texto: String, clave: ClavePublicaImportada): Result<ByteArray> =
+        cifrar(texto, clave.perfil)
 
     /**
      * Recupera el texto y el perfil de un Envelope producido por esta misma implementación.

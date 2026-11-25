@@ -4,6 +4,7 @@ package com.securesms.app.ui
 import androidx.lifecycle.ViewModel
 import com.securesms.app.identity.RepositorioContactos
 import com.securesms.app.integration.CryptoGateway
+import com.securesms.app.integration.FalloDeCifrado
 import com.securesms.app.integration.Perfil
 import com.securesms.app.messaging.ClaveEnsamblado
 import com.securesms.app.messaging.EstadoEnsamblado
@@ -135,20 +136,25 @@ class MensajesViewModel(
         val sim = transporte.estadoSim()
         estado.update { it.copy(estadoSim = sim) }
         if (sim != EstadoSim.LISTA) return avisar("la SIM no esta lista")
-        val perfil = repositorio.claveDe(contacto.numero)?.takeIf { it.habilitaEnvio }?.perfil
+        val clavePublica = repositorio.claveDe(contacto.numero)?.takeIf { it.habilitaEnvio }
             ?: return avisar("se requiere una clave verificada")
         val destino = normalizarNumeroSms(contacto.numero) ?: return avisar("numero SMS invalido")
         var mensaje = MensajeUi(
             UUID.randomUUID().toString(), null, DireccionMensaje.ENVIADO, destino,
-            contacto.nombre, texto, perfil, EstadoMensaje.PREPARANDO,
+            contacto.nombre, texto, clavePublica.perfil, EstadoMensaje.PREPARANDO,
         )
         estado.update { it.copy(aviso = "") }
         publicar(mensaje)
-        val envelope = gateway.cifrar(texto, perfil).getOrNull()
+        val cifrado = withContext(Dispatchers.Default) { gateway.cifrar(texto, clavePublica) }
+        val envelope = cifrado.getOrNull()
         val fragmentos = envelope?.let { runCatching { encode(it) }.getOrNull() }
         val primerFragmento = fragmentos?.firstOrNull()?.let(::parsear)
         if (envelope == null || fragmentos == null || primerFragmento == null) {
-            publicar(mensaje.copy(estado = EstadoMensaje.ERROR, detalle = "no se pudo preparar el mensaje"))
+            val fallo = cifrado.exceptionOrNull() as? FalloDeCifrado
+            publicar(mensaje.copy(
+                estado = EstadoMensaje.ERROR,
+                detalle = fallo?.message ?: "no se pudo preparar el mensaje",
+            ))
             return true
         }
         mensaje = mensaje.copy(
@@ -205,13 +211,19 @@ class MensajesViewModel(
             caracteresBase64 = longitudBase64(envelope),
         )
         publicar(reconstruido)
-        val descifrado = gateway.descifrar(envelope).getOrNull()
-        publicar(
-            if (descifrado == null) reconstruido.copy(
-                estado = EstadoMensaje.ERROR, detalle = "no se pudo descifrar el mensaje",
-            ) else reconstruido.copy(
-                estado = EstadoMensaje.DESCIFRADO, texto = descifrado.texto, perfil = descifrado.perfil,
-            ),
+        gateway.descifrar(envelope).fold(
+            onSuccess = { descifrado ->
+                publicar(reconstruido.copy(
+                    estado = EstadoMensaje.DESCIFRADO, texto = descifrado.texto, perfil = descifrado.perfil,
+                ))
+            },
+            onFailure = { error ->
+                val fallo = error as? FalloDeCifrado
+                publicar(reconstruido.copy(
+                    estado = if (fallo?.incompleto == true) EstadoMensaje.INCOMPLETO else EstadoMensaje.ERROR,
+                    detalle = fallo?.message ?: "no se pudo descifrar el mensaje",
+                ))
+            },
         )
     }
 

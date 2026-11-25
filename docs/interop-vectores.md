@@ -1,6 +1,21 @@
 # Vectores de interoperabilidad JVM ↔ Android
 
-Estado: esquema pendiente de valores. Los valores los entrega Persona 2 con su implementación de `:crypto`; la IA no los inventa ni los deduce de la evidencia del spike.
+Persona 2 entregó `:crypto` v1.0.1 con 56 vectores en JSON. Los resultados en dispositivos quedan pendientes.
+
+## Pruebas disponibles
+
+- `:crypto:test` ejecuta los vectores y las pruebas de parámetros OAEP en JVM.
+- `VectorsInstrumentedTest` lee los mismos vectores desde el APK de pruebas. Incluyen pares exclusivos de prueba, válidos para verificar JVM → Android con claves de software.
+- `CryptoGatewayKeystoreTest` comprueba el adaptador en los cuatro perfiles con claves no exportables y alias temporales. Prueba texto vacío, ASCII y Unicode. Se ejecuta por separado de las pruebas anteriores del almacén que usan alias de producción.
+
+Para ejecutar solo las pruebas del ticket en un teléfono conectado:
+
+```bash
+./gradlew :app:connectedDebugAndroidTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=com.securesms.app.VectorsInstrumentedTest,com.securesms.app.integration.CryptoGatewayKeystoreTest
+```
+
+La prueba de vectores y el round-trip local de Keystore cubren casos distintos. Para verificar un cruce de runtimes con Keystore, cifra en JVM con la pública de Android y descifra en el teléfono. En el otro sentido, cifra en Android con una pública de prueba de JVM y descifra en JVM. Registra cada resultado por perfil y dispositivo.
 
 La verificación de interoperabilidad se ejecuta solo con vectores entregados por Persona 2. Un cifrado correcto en Android no demuestra por sí solo la interoperabilidad: hace falta que el mismo mensaje circule en ambos sentidos con los parámetros OAEP acordados en D-022.
 
@@ -20,7 +35,7 @@ Cada caso se ejecuta en los dos dispositivos propios, Samsung `R5CX80AMTKN` (API
 
 ## Formato del vector
 
-Cada vector entregado por Persona 2 incluye:
+Para el intercambio manual con Keystore registra:
 
 ```text
 perfil: RSA_2048 | RSA_3072
@@ -43,7 +58,3 @@ La clave pública de prueba se usa solo para el cifrado en JVM. La privada perma
 - La operación sigue funcionando tras `keyStore.getKey(alias, null)`.
 - El proveedor y el nivel de seguridad se registran solo cuando la operación termina correctamente.
 - No aparece material privado en logs, archivos ni reportes.
-
-## Dependencias
-
-El ticket 08 registra esta dependencia en `.partner/MISSIONS.md`. Hasta que Persona 2 entregue `:crypto` y los vectores, el trabajo se limita a preparar el arnés y la documentación; no se ejecuta la verificación ni se inventan resultados.
