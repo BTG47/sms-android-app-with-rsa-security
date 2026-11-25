@@ -1,6 +1,7 @@
 package com.securesms.app.integration
 
 import org.junit.Assert.assertArrayEquals
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -45,9 +46,41 @@ class FakeCryptoGatewayTest {
     }
 
     @Test
-    fun `el tamano esta acotado`() {
-        val bytes = gateway.cifrar("x".repeat(10_000), Perfil.ECC_P384).getOrThrow()
+    fun `el envelope demo se identifica por su prefijo`() {
+        val bytes = gateway.cifrar("Hola", Perfil.ECC_P256).getOrThrow()
 
-        assertTrue(bytes.size <= 36)
+        assertArrayEquals("DEMO".toByteArray(Charsets.US_ASCII), bytes.copyOfRange(0, 4))
+    }
+
+    @Test
+    fun `descifrar recupera el texto y el perfil`() {
+        for (perfil in Perfil.entries) {
+            val bytes = gateway.cifrar("Hola ñ 你好 😀", perfil).getOrThrow()
+            val claro = gateway.descifrar(bytes).getOrThrow()
+
+            assertEquals("Hola ñ 你好 😀", claro.texto)
+            assertEquals(perfil, claro.perfil)
+        }
+    }
+
+    @Test
+    fun `texto vacio ida y vuelta`() {
+        val claro = gateway.descifrar(gateway.cifrar("", Perfil.RSA_3072).getOrThrow()).getOrThrow()
+
+        assertEquals("", claro.texto)
+    }
+
+    @Test
+    fun `descifrar rechaza bytes que no son demo`() {
+        assertTrue(gateway.descifrar("SSMS".toByteArray()).isFailure)
+        assertTrue(gateway.descifrar(ByteArray(0)).isFailure)
+    }
+
+    @Test
+    fun `un texto largo se recupera intacto`() {
+        val texto = "x".repeat(10_000)
+        val bytes = gateway.cifrar(texto, Perfil.ECC_P384).getOrThrow()
+
+        assertEquals(texto, gateway.descifrar(bytes).getOrThrow().texto)
     }
 }
