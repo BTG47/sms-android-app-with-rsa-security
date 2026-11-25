@@ -1,6 +1,5 @@
 /*
- * Punto de entrada mínimo de la aplicación.
- * Responsabilidad: inicializar la interfaz Compose; aún no contiene navegación ni permisos.
+ * Punto de entrada de SecureSMS y navegación entre sus pantallas.
  */
 
 package com.securesms.app
@@ -24,7 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -36,29 +35,56 @@ import com.securesms.app.integration.Perfil
 import com.securesms.app.ui.ContactosViewModel
 import com.securesms.app.ui.PantallaContactos
 import com.securesms.app.ui.ResumenViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.securesms.app.messaging.RegistroSmsAndroid
+import com.securesms.app.messaging.TransporteSmsAndroid
+import com.securesms.app.ui.MensajesViewModel
+import com.securesms.app.ui.PantallaMensajes
 import java.io.File
 
 /** Pantallas del prototipo, sin biblioteca de navegación. */
 private enum class Pantalla {
     CONTACTOS,
+    MENSAJES,
     RESUMEN,
 }
 
 /** Actividad principal del prototipo. */
 class MainActivity : ComponentActivity() {
+    companion object {
+        private lateinit var repositorio: RepositorioContactos
+        private lateinit var almacenClaves: AlmacenDeClavesAndroid
+        private val inicializado get() = ::repositorio.isInitialized
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val resumen = ResumenViewModel(FakeCryptoGateway())
-        val archivo = File(applicationContext.noBackupFilesDir, "contactos.json")
-        val contactos = ContactosViewModel(
-            RepositorioContactos(ArchivoContactos(archivo)),
-            AlmacenDeClavesAndroid(applicationContext),
-        )
+        val contexto = applicationContext
+        if (!inicializado) {
+            val archivo = File(contexto.noBackupFilesDir, "contactos.json")
+            repositorio = RepositorioContactos(ArchivoContactos(archivo))
+            almacenClaves = AlmacenDeClavesAndroid(contexto)
+        }
+        val proveedor = ViewModelProvider(this, viewModelFactory {
+            initializer { ContactosViewModel(repositorio, almacenClaves) }
+            initializer { ResumenViewModel(FakeCryptoGateway()) }
+            initializer {
+                MensajesViewModel(
+                    repositorio, FakeCryptoGateway(),
+                    TransporteSmsAndroid(contexto), RegistroSmsAndroid(contexto),
+                )
+            }
+        })
+        val contactos = proveedor[ContactosViewModel::class.java]
+        val resumen = proveedor[ResumenViewModel::class.java]
+        val mensajes = proveedor[MensajesViewModel::class.java]
 
         setContent {
             MaterialTheme {
-                var pantalla by remember { mutableStateOf(Pantalla.CONTACTOS) }
+                var pantalla by rememberSaveable { mutableStateOf(Pantalla.CONTACTOS) }
 
                 Column(
                     modifier = Modifier
@@ -75,6 +101,9 @@ class MainActivity : ComponentActivity() {
                             TextButton(onClick = { pantalla = Pantalla.CONTACTOS }) {
                                 Text("Contactos")
                             }
+                            TextButton(onClick = { pantalla = Pantalla.MENSAJES }) {
+                                Text("Mensajes")
+                            }
                             TextButton(onClick = { pantalla = Pantalla.RESUMEN }) {
                                 Text("Resumen demo")
                             }
@@ -82,7 +111,11 @@ class MainActivity : ComponentActivity() {
                     }
 
                     when (pantalla) {
-                        Pantalla.CONTACTOS -> PantallaContactos(contactos)
+                        Pantalla.CONTACTOS -> PantallaContactos(contactos) { numero ->
+                            mensajes.seleccionar(numero)
+                            pantalla = Pantalla.MENSAJES
+                        }
+                        Pantalla.MENSAJES -> PantallaMensajes(mensajes)
                         Pantalla.RESUMEN -> ResumenPantalla(resumen)
                     }
                 }

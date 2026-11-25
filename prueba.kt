@@ -3,10 +3,7 @@ Código de prueba interno. Objetivo: Aplicar una clase y un print que permita
 Visualizar su información
 */
 
-package my.demo
-
-import kotlin.text.*
-import my.demo.Destinatario
+package com.securesms.app.ui
 
 class Destinatario(val numero: String, val perfil: String, val huella: String?)
 
