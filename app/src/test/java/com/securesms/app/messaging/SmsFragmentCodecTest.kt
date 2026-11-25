@@ -9,6 +9,7 @@ import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /** Casos de aceptación de `encode` y `decode` con bytes opacos. */
@@ -57,5 +58,26 @@ class SmsFragmentCodecTest {
     fun `id hexadecimal se valida sin distinguir mayusculas`() {
         assertNotNull(parsear("SS1:abcdef123456:01:01:QUJD"))
         assertNull(parsear("SS1:ZZZZZZZZZZZZ:01:01:QUJD"))
+    }
+
+    @Test
+    fun `cada fragmento cabe en un sms gsm7`() {
+        val fragmentos = encode(ByteArray(1024) { it.toByte() })
+
+        fragmentos.forEach { texto ->
+            assertTrue(texto.length <= 160)
+            assertTrue(texto.all { it in GSM7_BASICO })
+        }
+    }
+
+    private companion object {
+        /**
+         * Alfabeto GSM-7 básico del contrato: cada carácter ocupa un solo septeto, así que
+         * un fragmento de hasta 160 caracteres viaja en un único SMS sin concatenar.
+         */
+        val GSM7_BASICO: Set<Char> = (
+            "@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?" +
+                "¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà"
+            ).toSet()
     }
 }
