@@ -28,11 +28,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.securesms.app.identity.AlmacenDeClavesAndroid
+import com.securesms.app.identity.ArchivoContactos
+import com.securesms.app.identity.RepositorioContactos
 import com.securesms.app.integration.FakeCryptoGateway
 import com.securesms.app.integration.Perfil
 import com.securesms.app.ui.ContactosViewModel
 import com.securesms.app.ui.PantallaContactos
 import com.securesms.app.ui.ResumenViewModel
+import java.io.File
 
 /** Pantallas del prototipo, sin biblioteca de navegación. */
 private enum class Pantalla {
@@ -46,7 +50,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val resumen = ResumenViewModel(FakeCryptoGateway())
-        val contactos = ContactosViewModel()
+        val archivo = File(applicationContext.noBackupFilesDir, "contactos.json")
+        val contactos = ContactosViewModel(
+            RepositorioContactos(ArchivoContactos(archivo)),
+            AlmacenDeClavesAndroid(applicationContext),
+        )
 
         setContent {
             MaterialTheme {

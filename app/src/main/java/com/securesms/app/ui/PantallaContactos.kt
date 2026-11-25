@@ -55,6 +55,7 @@ fun huellaLegible(huella: String): String =
 @Composable
 fun PantallaContactos(viewModel: ContactosViewModel) {
     val estado by viewModel.uiState.collectAsState()
+    val alcance = rememberCoroutineScope()
 
     var numero by remember { mutableStateOf("") }
     var nombre by remember { mutableStateOf("") }
@@ -70,6 +71,11 @@ fun PantallaContactos(viewModel: ContactosViewModel) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text("Contactos", style = MaterialTheme.typography.headlineSmall)
+
+        MiClaveCard(
+            miClave = estado.miClave,
+            onGenerar = { alcance.launch { viewModel.generarMiClave() } },
+        )
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedTextField(
@@ -125,6 +131,48 @@ fun PantallaContactos(viewModel: ContactosViewModel) {
                 onExportar = { viewModel.exportar(fila.numero) },
                 puedeEnviar = viewModel.puedeEnviar(fila.numero),
             )
+        }
+    }
+}
+
+/** Tarjeta con la clave pública propia: se genera solo cuando el usuario lo pide (D-027). */
+@Composable
+private fun MiClaveCard(
+    miClave: MiClaveUi?,
+    onGenerar: () -> Unit,
+) {
+    val portapapeles = LocalClipboard.current
+    val alcance = rememberCoroutineScope()
+    val copiar: (String) -> Unit = { valor ->
+        alcance.launch {
+            portapapeles.setClipEntry(ClipEntry(ClipData.newPlainText("SecureSMS", valor)))
+        }
+    }
+
+    Card(Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier.padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Text("Mi clave publica (RSA-2048)", style = MaterialTheme.typography.titleMedium)
+
+            if (miClave == null) {
+                Text("Todavia no existe en este dispositivo.")
+                Button(onClick = onGenerar) {
+                    Text("Generar")
+                }
+            } else {
+                BloqueCopiable(
+                    etiqueta = "Huella SHA-256",
+                    valor = huellaLegible(miClave.huella),
+                    onCopiar = { copiar(miClave.huella) },
+                )
+                BloqueCopiable(
+                    etiqueta = "Clave publica (Base64)",
+                    valor = miClave.base64,
+                    onCopiar = { copiar(miClave.base64) },
+                )
+            }
         }
     }
 }

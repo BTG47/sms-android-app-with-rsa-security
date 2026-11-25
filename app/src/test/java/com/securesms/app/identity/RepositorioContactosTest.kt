@@ -13,7 +13,7 @@ private const val OTRO_MATERIAL = "ZGVm"
 /** Casos del repositorio en memoria: importar no verifica y verificar habilita el envío. */
 class RepositorioContactosTest {
 
-    private val repositorio = RepositorioContactos()
+    private val repositorio = RepositorioContactos(AlmacenContactosEnMemoria())
     private val contacto = Contacto("5512345678", "Ana")
 
     private fun importar(material: String = MATERIAL) {
@@ -120,5 +120,56 @@ class RepositorioContactosTest {
 
         verificar()
         assertEquals(EstadoClave.VERIFICADA, repositorio.estadoDe(contacto.numero))
+    }
+
+    @Test
+    fun `un repositorio nuevo con el mismo almacen recupera contactos y estados`() {
+        val almacen = AlmacenContactosEnMemoria()
+        val primero = RepositorioContactos(almacen)
+        primero.agregar(contacto)
+        primero.importarClave(contacto.numero, Perfil.ECC_P256, MATERIAL).getOrThrow()
+        val huella = primero.claveDe(contacto.numero)!!.huella
+        assertTrue(primero.verificarClave(contacto.numero, huella))
+
+        val segundo = RepositorioContactos(almacen)
+
+        assertEquals(listOf(contacto), segundo.todos())
+        assertEquals(EstadoClave.VERIFICADA, segundo.estadoDe(contacto.numero))
+        assertEquals(MATERIAL, segundo.exportarClave(contacto.numero))
+        assertTrue(segundo.puedeEnviar(contacto.numero))
+    }
+
+    @Test
+    fun `la verificacion sobrevive aunque se actualice el contacto`() {
+        val almacen = AlmacenContactosEnMemoria()
+        val primero = RepositorioContactos(almacen)
+        primero.agregar(contacto)
+        primero.importarClave(contacto.numero, Perfil.ECC_P256, MATERIAL).getOrThrow()
+        val huella = primero.claveDe(contacto.numero)!!.huella
+        assertTrue(primero.verificarClave(contacto.numero, huella))
+
+        val segundo = RepositorioContactos(almacen)
+        segundo.agregar(contacto.copy(nombre = "Ana Maria"))
+
+        assertEquals(EstadoClave.VERIFICADA, segundo.estadoDe(contacto.numero))
+        assertEquals("Ana Maria", segundo.claveDe(contacto.numero)!!.contacto.nombre)
+    }
+
+    @Test
+    fun `si el almacen falla al cargar arranca vacio y lo reporta`() {
+        val repositorio = RepositorioContactos(AlmacenContactosEnMemoria(fallaAlCargar = true))
+
+        assertTrue(repositorio.todos().isEmpty())
+        assertTrue(repositorio.cargaFallida)
+    }
+
+    @Test
+    fun `un fallo de guardado no pierde el estado en memoria`() {
+        val repositorio = RepositorioContactos(AlmacenContactosEnMemoria(fallaAlGuardar = true))
+
+        repositorio.agregar(contacto)
+
+        assertEquals(listOf(contacto), repositorio.todos())
+        assertTrue(repositorio.ultimoFalloDeGuardado)
     }
 }

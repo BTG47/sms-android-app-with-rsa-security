@@ -51,6 +51,11 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     debugImplementation("androidx.compose.ui:ui-tooling")
 
+    // Solo anotaciones de compilación; su jar no está en caché y el runtime no lo necesita.
+    implementation("com.google.code.gson:gson:2.11.0") {
+        exclude(group = "com.google.errorprone", module = "error_prone_annotations")
+    }
+
     testImplementation("junit:junit:4.13.2")
 
     // Pruebas instrumentadas del spike de Keystore (ticket 03).

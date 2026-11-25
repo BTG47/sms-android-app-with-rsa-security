@@ -1,7 +1,12 @@
 package com.securesms.app.ui
 
+import com.securesms.app.identity.AlmacenContactosEnMemoria
+import com.securesms.app.identity.AlmacenDeClavesFalso
 import com.securesms.app.identity.EstadoClave
+import com.securesms.app.identity.Huella
+import com.securesms.app.identity.RepositorioContactos
 import com.securesms.app.integration.Perfil
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -14,7 +19,10 @@ private const val MATERIAL = "YWJj"
 /** Casos del estado que alimenta la pantalla de contactos. */
 class ContactosViewModelTest {
 
-    private val viewModel = ContactosViewModel()
+    private val viewModel = ContactosViewModel(
+        RepositorioContactos(AlmacenContactosEnMemoria()),
+        AlmacenDeClavesFalso(),
+    )
 
     private fun agregar() {
         viewModel.agregar(NUMERO, "Ana")
@@ -97,5 +105,66 @@ class ContactosViewModelTest {
             viewModel.uiState.value.filas.single().estado,
         )
         assertTrue(viewModel.uiState.value.aviso.isNotBlank())
+    }
+
+    @Test
+    fun `si la carga falla lo avisa`() {
+        val viewModel = ContactosViewModel(
+            RepositorioContactos(AlmacenContactosEnMemoria(fallaAlCargar = true)),
+            AlmacenDeClavesFalso(),
+        )
+
+        assertTrue(viewModel.uiState.value.filas.isEmpty())
+        assertTrue(viewModel.uiState.value.aviso.isNotBlank())
+    }
+
+    @Test
+    fun `sin clave propia no hay miClave`() {
+        assertNull(viewModel.uiState.value.miClave)
+    }
+
+    @Test
+    fun `generar publica la clave y su huella`() {
+        runBlocking { viewModel.generarMiClave() }
+
+        val miClave = viewModel.uiState.value.miClave!!
+        assertEquals(MATERIAL, miClave.base64)
+        assertEquals(Huella.calcular(MATERIAL).getOrThrow(), miClave.huella)
+    }
+
+    @Test
+    fun `al iniciar publica la clave que ya existia`() {
+        val viewModel = ContactosViewModel(
+            RepositorioContactos(AlmacenContactosEnMemoria()),
+            AlmacenDeClavesFalso(perfilInicial = Perfil.RSA_2048),
+        )
+
+        assertEquals(MATERIAL, viewModel.uiState.value.miClave!!.base64)
+    }
+
+    @Test
+    fun `un fallo de generacion deja aviso y no publica clave`() {
+        val viewModel = ContactosViewModel(
+            RepositorioContactos(AlmacenContactosEnMemoria()),
+            AlmacenDeClavesFalso(fallaAlGenerar = true),
+        )
+
+        runBlocking { viewModel.generarMiClave() }
+
+        assertNull(viewModel.uiState.value.miClave)
+        assertTrue(viewModel.uiState.value.aviso.isNotBlank())
+    }
+
+    @Test
+    fun `si la generacion falla pero la clave quedo, la publica`() {
+        val viewModel = ContactosViewModel(
+            RepositorioContactos(AlmacenContactosEnMemoria()),
+            AlmacenDeClavesFalso(fallaPeroQuedaGenerada = true),
+        )
+        assertNull(viewModel.uiState.value.miClave)
+
+        runBlocking { viewModel.generarMiClave() }
+
+        assertEquals(MATERIAL, viewModel.uiState.value.miClave!!.base64)
     }
 }
